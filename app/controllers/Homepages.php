@@ -21,8 +21,4 @@ class Homepages extends BaseController
         $this->view('homepages/index', $data);
     }
 
-    /**
-     * De optellen-method berekent de som van twee getallen
-     * We gebruiken deze method voor een unittest
-     */
 }

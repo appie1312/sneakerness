@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS EvenementDB;
-CREATE DATABASE EvenementDB;
-USE EvenementDB;
+DROP DATABASE IF EXISTS sneakerness;
+CREATE DATABASE sneakerness;
+USE sneakerness;
 
 CREATE TABLE Organisator (
     Id INT AUTO_INCREMENT PRIMARY KEY,
