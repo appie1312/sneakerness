@@ -112,3 +112,48 @@ CREATE TABLE ContactPerVerkoper (
     ,FOREIGN KEY (VerkoperId) REFERENCES Verkoper(Id)
     ,FOREIGN KEY (ContactpersoonId) REFERENCES Contactpersoon(Id)
 );
+
+INSERT INTO Organisator (Naam, Gebruikersnaam, Wachtwoord, Opmerking) VALUES
+('Organisator 1', 'org1', 'wachtwoord123', 'Test organisator'),
+('Organisator 2', 'org2', 'wachtwoord456', 'Test organisator'),
+('Organisator 3', 'org3', 'wachtwoord789', 'Test organisator');
+
+INSERT INTO Bezoeker (Naam, Emailadres, Opmerking) VALUES
+('Abdulkadir', 'abdulkadir@test.com', 'Test bezoeker'),
+('Emma', 'emma@test.com', 'Test bezoeker'),
+('Lucas', 'lucas@test.com', 'Test bezoeker');
+
+INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands, Opmerking) VALUES
+('Sneaker Expo 2025', '2025-10-10', 'Amsterdam', 100, 20, 'Test evenement'),
+('Urban Sneak Event', '2025-11-05', 'Rotterdam', 50, 15, 'Test evenement'),
+('Sneak Fest', '2025-12-01', 'Utrecht', 75, 10, 'Test evenement');
+
+INSERT INTO Prijs (Datum, Tijdslot, Tarief, Opmerking) VALUES
+('2025-10-10', 'Ochtend', 15.00, 'Ochtend tarief'),
+('2025-10-10', 'Middag', 20.00, 'Middag tarief'),
+('2025-11-05', 'Ochtend', 12.50, 'Ochtend tarief');
+
+INSERT INTO Ticket (BezoekerId, EvenementId, PrijsId, AantalTickets, Datum, Opmerking) VALUES
+(1, 1, 1, 2, '2025-10-10', 'Voor vrienden'),
+(2, 1, 2, 1, '2025-10-10', 'VIP'),
+(3, 2, 3, 3, '2025-11-05', 'Groep van 3');
+
+INSERT INTO Verkoper (Naam, SpecialeStatus, VerkooptSoort, StandType, Dagen, Logo, Opmerking) VALUES
+('Sneaker Store 1', TRUE, 'Schoenen', 'A', 'Eén dag', '', 'Test verkoper'),
+('Sneaker Store 2', FALSE, 'Kleding', 'AA', 'Twee dagen', '', 'Test verkoper'),
+('Sneaker Store 3', FALSE, 'Accessoires', 'AA+', 'Eén dag', '', 'Test verkoper');
+
+INSERT INTO Stand (VerkoperId, StandType, Prijs, VerhuurdStatus, Opmerking) VALUES
+(1, 'A', 150.00, FALSE, 'Test stand'),
+(2, 'AA', 200.00, TRUE, 'Verhuurde stand'),
+(3, 'AA+', 250.00, FALSE, 'Test stand');
+
+INSERT INTO Contactpersoon (Naam, Telefoonnummer, Emailadres, Opmerking) VALUES
+('Jan Jansen', '0612345678', 'jan@test.com', 'Contactpersoon test'),
+('Emma de Vries', '0698765432', 'emma@test.com', 'Contactpersoon test'),
+('Lucas van Dijk', '0687654321', 'lucas@test.com', 'Contactpersoon test');
+
+INSERT INTO ContactPerVerkoper (VerkoperId, ContactpersoonId, Opmerking) VALUES
+(1, 1, 'Koppel test'),
+(2, 2, 'Koppel test'),
+(3, 3, 'Koppel test');

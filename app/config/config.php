@@ -4,14 +4,14 @@
  */
 define('DB_HOST', 'sneakerness');
 define('DB_NAME', 'sneakerness');
-define('DB_USER', 'host');
+define('DB_USER', 'root');
 define('DB_PASS', '');
 
 
 /**
  * De naam van de virtualhost
  */
-define('URLROOT', 'sneakerness');
+define('URLROOT', '/sneakerness');
 
 /**
  * Het pad naar de folder app
