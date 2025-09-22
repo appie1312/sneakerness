@@ -2,10 +2,10 @@
 // Mapping Locatie -> Afbeelding
 $eventImages = [
     'ATHENS'   => 'https://athenscabs.com/wp-content/uploads/2025/03/Lycabettus-Theatre-Events.webp',
-    'BERN'     => 'https://www.bern-altstadt.ch/wp-content/uploads/2023/05/GP_2015_IMG_4060-1024x683.jpg',
-    'MILAN'    => 'https://designweekguide.com/wp-content/uploads/2024/10/cover-anticipazioni-brera-2024.jpg',
-    'PARIS'    => 'https://www.parisinsidersguide.com/image-files/demonstration-may-day-palais-garnier-opera-800-2x1.jpg',
-    'BUDAPEST' => 'https://www.triptobudapest.hu/wp-content/uploads/2022/06/Westend-Rooftop-Terrace-845x321.jpg',
+    'BERN'     => 'https://a.storyblok.com/f/272028/4000x2667/098e994d94/01_bern_fanwalk_womens_euro_2025_c_berner-ballzauber_duy_tong.jpg',
+    'MILAN'    => 'https://en.locationamilano.it/media/location/thumb/min_97158382d74945338e1e5bedf83a40ec_1525862849.jpg',
+    'PARIS'    => 'https://pohcdn.com/sites/default/files/styles/node__blog_post__bp_banner/public/2021-05/Festivals-et-evenements-a-Paris.jpg',
+    'BUDAPEST' => 'https://www.corinthia.com/globalassets/hotel-budapest/images/discover-budapest/events-in-budapest_sziget-festival_credit-balazs-moha_szigetfestival.jpg',
 ];
 ?>
 

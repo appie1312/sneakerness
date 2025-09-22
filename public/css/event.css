@@ -1,40 +1,65 @@
-:root{
-  --bg:#fff; --ink:#0b0b0c; --muted:#6b6f76; --card:#f6f7f8; --brand:#111; --ring:#e6e7e8;
+/* =======================
+   Kleuren & Variabelen
+   ======================= */
+:root {
+  --bg: #fff;
+  --ink: #2727be;
+  --muted: #6b6f76;
+  --card: #f6f7f8;
+  --brand: #c50e0e;
+  --ring: #e6e7e8;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-img{max-width:100%;display:block}
 
-.container{max-width:1100px;margin:auto;padding:24px}
-header.site{border-bottom:1px solid var(--ring);background:#fff;position:sticky;top:0;z-index:10}
-.nav{display:flex;align-items:center;gap:24px;justify-content:space-between;padding:14px 24px}
-.nav .brand{font-weight:900;font-size:28px;letter-spacing:1px}
-
-/* two-column layout */
-.events-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:28px}
-.events-col h2{font-size:14px;letter-spacing:.1em;color:var(--muted);margin:10px 0 14px}
-.muted{color:var(--muted)}
-
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.event-card{background:var(--card);border:1px solid var(--ring);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-.event-card .event-media{display:block;aspect-ratio:16/9;background:#dfe3e6}
-.event-body{padding:14px 14px 16px}
-.event-title{margin:6px 0 4px;font-size:22px;line-height:1.15}
-.event-title a{color:var(--ink);text-decoration:none}
-.event-sub{margin:0;color:var(--muted);font-weight:500}
-.event-meta{display:flex;gap:12px;margin:10px 0 14px;color:var(--muted);font-size:14px}
-
-.btn{display:inline-block;padding:10px 14px;border-radius:999px;background:#000;color:#fff;text-decoration:none;font-weight:600}
-.event-card.soon .btn{display:none}
-.tag{display:inline-block;border:1px dashed var(--muted);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
-
-footer.site{border-top:1px solid var(--ring);padding:20px;color:var(--muted);font-size:14px}
-
-/* responsive */
-@media (max-width:980px){
-  .events-grid{grid-template-columns:1fr}
-  .card-grid{grid-template-columns:1fr 1fr}
+/* =======================
+   Basisinstellingen
+   ======================= */
+* {
+  box-sizing: border-box;
 }
-@media (max-width:640px){
-  .card-grid{grid-template-columns:1fr}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
 }
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =======================
+   Layout & Navigatie
+   ======================= */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+}
+
+header.site {
+  border-bottom: 1px solid var(--ring);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+  padding: 14px 24px;
+}
+
+.nav .brand {
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* ...verder met de rest van je CSS in deze stijl... */
