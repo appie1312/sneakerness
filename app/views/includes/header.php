@@ -14,7 +14,7 @@
               <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/tickets/index">tickets</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>#">nog leeg</a>
+              <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/event/index">events</a>
             </li>
           </ul>
         </div>
