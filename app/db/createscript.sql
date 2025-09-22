@@ -36,6 +36,15 @@ CREATE TABLE Evenement (
     DatumGewijzigd TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands)
+VALUES
+('Athens 2025',   '2025-10-10', 'Athens', 300, 40),
+('Milan 2025',    '2025-11-15', 'Milan',  350, 50),
+('Budapest 2025', '2025-11-08', 'Budapest', 250, 30),
+('Bern 2025',     '2025-11-22', 'Bern',   200, 25),
+('Paris 2026',    '2026-03-14', 'Paris',  400, 55);
+
+
 CREATE TABLE Prijs (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Datum DATE NOT NULL,
