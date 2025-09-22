@@ -11,7 +11,7 @@
               <a class="nav-link active" aria-current="page" href="/<?php echo URLROOT; ?>/homepages/index">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/tickets/index">events</a>
+              <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/tickets/index">tickets</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>#">nog leeg</a>
