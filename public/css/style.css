@@ -7,3 +7,16 @@
     object-fit: cover;
     filter: brightness(50%);
 }
+
+.introductieFoto {
+    margin-top: auto;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+}
