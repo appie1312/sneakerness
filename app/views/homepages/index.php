@@ -20,7 +20,7 @@
 
     <img src="/public/img/wallpaper.jpg" alt="" class="hero">
 
-    <div class="mx-3">
+    <div class="mx-3 ">
       <div class="col-lg-6 mx-auto text-white mt-5 text-center">
         <h1 class="display-5 fw-bold">welkom bij sneakerness</h1>
         <p class="lead mb-4">in Rotterdam: het ultieme sneaker-event met art, sport, fashion, muziek en exclusieve
@@ -32,13 +32,6 @@
       </div>
     </div>
   </header>
-
-<main class="container my-5">
-
- Kom en ontdek de allernieuwste sneakers, de meest inspirerende muziek, de laatste trends in fashion en een reeks unieke stands op ons bruisende evenement van twee dagen in het hart van Rotterdam. Laat je verrassen door exclusieve releases, ontmoet gelijkgestemde liefhebbers en geniet van een onvergetelijke ervaring vol stijl, creativiteit en entertainment.
-
-
-</main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">

@@ -16,7 +16,8 @@ class Tickets extends BaseController
     
     public function index()
     {
-        // Laat index gewoon overzicht aanroepen
+
+
         $this->overzicht();
     }
 }
