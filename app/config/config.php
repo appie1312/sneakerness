@@ -12,7 +12,7 @@ define('DB_PASS', '');
  * De naam van de virtualhost
  */
 // config
-define('URLROOT', 'http://sneakerness'); // of https://... als je SSL hebt
+define('URLROOT', '/sneakerness'); // of https://... als je SSL hebt
 
 
 /**
