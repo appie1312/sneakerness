@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../model/EventModel.php';
+require_once __DIR__ . '/../models/EventModel.php';
 require_once __DIR__ . '/../libraries/Database.php';
 
 use App\Model\EventModel;
