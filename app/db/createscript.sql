@@ -36,13 +36,6 @@ CREATE TABLE Evenement (
     ,DatumGewijzigd TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands)
-VALUES
-('Athens 2025',   '2025-10-10', 'Athens', 300, 40),
-('Milan 2025',    '2025-11-15', 'Milan',  350, 50),
-('Budapest 2025', '2025-11-08', 'Budapest', 250, 30),
-('Bern 2025',     '2025-11-22', 'Bern',   200, 25),
-('Paris 2026',    '2026-03-14', 'Paris',  400, 55);
 
 
 CREATE TABLE Prijs (
@@ -123,6 +116,14 @@ CREATE TABLE ContactPerVerkoper (
 );
 
 
+INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands)
+VALUES
+('Athens 2025',   '2025-10-10', 'Athens', 300, 40),
+('Milan 2025',    '2025-11-15', 'Milan',  350, 50),
+('Budapest 2025', '2025-11-08', 'Budapest', 250, 30),
+('Bern 2025',     '2025-11-22', 'Bern',   200, 25),
+('Paris 2026',    '2026-03-14', 'Paris',  400, 55);
+
 INSERT INTO Organisator (Naam, Gebruikersnaam, Wachtwoord, Opmerking) VALUES
 ('Organisator 1', 'org1', 'wachtwoord123', 'Test organisator'),
 ('Organisator 2', 'org2', 'wachtwoord456', 'Test organisator'),
@@ -132,11 +133,6 @@ INSERT INTO Bezoeker (Naam, Emailadres, Opmerking) VALUES
 ('Abdulkadir', 'abdulkadir@test.com', 'Test bezoeker'),
 ('Emma', 'emma@test.com', 'Test bezoeker'),
 ('Lucas', 'lucas@test.com', 'Test bezoeker');
-
-INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands, Opmerking) VALUES
-('Sneaker Expo 2025', '2025-10-10', 'Amsterdam', 100, 20, 'Test evenement'),
-('Urban Sneak Event', '2025-11-05', 'Rotterdam', 50, 15, 'Test evenement'),
-('Sneak Fest', '2025-12-01', 'Utrecht', 75, 10, 'Test evenement');
 
 INSERT INTO Prijs (Datum, Tijdslot, Tarief, Opmerking) VALUES
 ('2025-10-10', 'Ochtend', 15.00, 'Ochtend tarief'),
