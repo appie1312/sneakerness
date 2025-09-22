@@ -23,6 +23,11 @@
             </tr>
         </thead>
         <tbody>
+        <?php if (empty($data['tickets'])): ?>
+        <tr>
+            <td colspan="7" class="text-center">Er zijn geen tickets beschikbaar.</td>
+        </tr>
+        <?php else: ?>
         <?php foreach ($data['tickets'] as $ticket): ?>
             <tr>
                 <td><?= $ticket['Id'] ?></td>
@@ -34,6 +39,7 @@
                 <td><?= $ticket['Opmerking'] ?></td>
             </tr>
         <?php endforeach; ?>
+        <?php endif; ?>
         </tbody>
     </table>
 </div>

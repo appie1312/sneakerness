@@ -4,7 +4,7 @@
  */
 define('DB_HOST', 'sneakerness');
 define('DB_NAME', 'sneakerness');
-define('DB_USER', 'host');
+define('DB_USER', 'root');
 define('DB_PASS', '');
 
 
