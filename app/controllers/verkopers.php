@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../models/VerkoperModel.php';
 require_once __DIR__ . '/../libraries/Database.php';
 
-class VerkopersController extends BaseController
+class Verkopers extends BaseController
 {
     private VerkoperModel $verkoperModel;
 
@@ -16,11 +16,8 @@ class VerkopersController extends BaseController
     {
         $verkopers = $this->verkoperModel->getAlleVerkopers();
 
-        $this->view('verkopers/index');
 
-        // require APPROOT . '/views/includes/header.php';
-        // require APPROOT . '/views/verkopers/index.php';
-        // require APPROOT . '/views/includes/footer.php';
+        require APPROOT . '/views/verkopers/index.php';
     }
 
 }

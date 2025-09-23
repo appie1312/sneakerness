@@ -25,7 +25,7 @@
         <tbody>
         <?php if (empty($data['tickets'])): ?>
         <tr>
-            <td colspan="7" class="text-center">Er zijn geen tickets beschikbaar</td>
+            <td colspan="7" class="text-center">Er zijn geen tickets te koop</td>
         </tr>
         <?php else: ?>
         <?php foreach ($data['tickets'] as $ticket): ?>
