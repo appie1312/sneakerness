@@ -10,7 +10,7 @@ class StandsModel
         $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
     }
 
-  public function getStands(): array
+public function getStands(): array
 {
     try {
         $sql = "SELECT 
@@ -28,11 +28,11 @@ class StandsModel
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
     } catch (PDOException $e) {
-        echo "Fout bij ophalen stands: " . $e->getMessage();
-        return [];
+        // gooi fout door naar bovenliggende laag
+        throw new Exception("Fout bij ophalen stands: " . $e->getMessage(), 0, $e);
     }
 }
-
 }
