@@ -15,12 +15,8 @@
         <thead>
             <tr>
                 <th>Naam</th>
-                <th>Telefoon</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Opmerking</th>
-                <th>Aangemaakt</th>
-                <th>Gewijzigd</th>
+                <th>Telefoonnummer</th>
+                <th>Emailadres</th>
             </tr>
         </thead>
             <tbody>
@@ -32,12 +28,9 @@
             <?php foreach ($data['contact'] as $contact): ?>
                 <tr>
                     <td><?= $contact['Naam'] ?></td>
-                    <td>€ <?= number_format($contact['Telefoon'], 2, ',', '.') ?></td>
-                    <td><?= $contact['Email'] ?></td>
-                    <td><?= $contact['IsActief'] ? 'Actief' : 'Inactief' ?></td>
-                    <td><?= $contact['Opmerking'] ?></td>
-                    <td><?= $contact['Aangemaakt'] ?></td>
-                    <td><?= $contact['Gewijzigd'] ?></td>
+                    <td><?= $contact['Telefoonnummer'] ?></td>
+                    <td><?= $contact['Emailadres'] ?></td>
+
                 </tr>
             <?php endforeach; ?>
             <?php endif; ?>

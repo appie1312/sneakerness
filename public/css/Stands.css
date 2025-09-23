@@ -1,0 +1,29 @@
+
+    .wrap {
+      max-width: 1080px;
+      margin: auto;
+      padding: 20px 16px;
+    }
+
+    .row-title {
+      font-size: 28px;
+      font-weight: 800;
+    }
+    
+    .card {
+      margin-bottom: 10px;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+
+        .card:hover {
+      transform: translateY(-4px);
+    }

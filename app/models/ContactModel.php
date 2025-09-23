@@ -10,7 +10,7 @@ class ContactModel
         $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
     }
 
-  public function getcontact()
+  public function getContact()
 {
     try {
         // dit stuk zorgt ervoor dat alle informatie uit de benodigde tabel wordt gehaald
@@ -18,8 +18,8 @@ class ContactModel
                        Naam, 
                        Telefoonnummer, 
                        Emailadres, 
-                       IsActief, 
-                       Opmerking, 
+                       IsActief,
+                       Opmerking,
                        DatumAangemaakt, 
                        DatumGewijzigd
                 FROM Contactpersoon
