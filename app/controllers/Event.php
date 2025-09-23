@@ -31,6 +31,5 @@ class Event extends BaseController
         $comingSoon = $comingSoon;
 
         require APPROOT . '/views/event/index.php';
-        require APPROOT . '/views/includes/footer.php';
     }
 }
