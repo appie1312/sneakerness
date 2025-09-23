@@ -32,7 +32,7 @@
             <?php foreach ($data['contact'] as $contact): ?>
                 <tr>
                     <td><?= $contact['Naam'] ?></td>
-                    <td>€ <?= number_format($contact['Telefoon'], 2, ',', '.') ?></td>
+                    <td><?= $contact['Telefoon'] ?></td>
                     <td><?= $contact['Email'] ?></td>
                     <td><?= $contact['IsActief'] ? 'Actief' : 'Inactief' ?></td>
                     <td><?= $contact['Opmerking'] ?></td>
