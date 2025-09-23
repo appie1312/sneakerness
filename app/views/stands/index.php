@@ -21,9 +21,6 @@
       <div class="card">Stand Nike</div>
       <div class="card">Stand Adidas</div>
       <div class="card">Stand New-Balance</div>
-      <div class="card">Stand Skecher</div>
-      <div class="card">Stand Birkenstock</div>
-      <div class="card">Stand Vans</div>
     </div>
   </div>
 </body>

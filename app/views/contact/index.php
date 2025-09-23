@@ -15,8 +15,8 @@
         <thead>
             <tr>
                 <th>Naam</th>
-                <th>Telefoon</th>
-                <th>Email</th>
+                <th>Telefoonnummer</th>
+                <th>Emailadres</th>
             </tr>
         </thead>
             <tbody>
@@ -28,8 +28,8 @@
             <?php foreach ($data['contact'] as $contact): ?>
                 <tr>
                     <td><?= $contact['Naam'] ?></td>
-                    <td><?= $contact['Telefoon'] ?></td>
-                    <td><?= $contact['Email'] ?></td>
+                    <td><?= $contact['Telefoonnummer'] ?></td>
+                    <td><?= $contact['Emailadres'] ?></td>
 
                 </tr>
             <?php endforeach; ?>
