@@ -23,7 +23,7 @@
             </tr>
             <?php foreach ($verkopers as $verkoper): ?>
                 <tr>
-                    <td><?= $verkoper->Naam?></td>
+                    <td><?= $verkoper-> Naam?></td>
                     <td><?= $verkoper -> SpecialeStatus ? 'Ja' : 'Nee' ?></td>
                     <td><?= $verkoper -> VerkooptSoort ?></td>
                     <td><?= $verkoper -> StandType  ?></td>
