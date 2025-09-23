@@ -24,4 +24,6 @@
       min-height: 100px;
     }
 
-    
+        .card:hover {
+      transform: translateY(-4px);
+    }
