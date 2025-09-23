@@ -1,11 +1,11 @@
 <?php
 // Mapping Locatie -> Afbeelding
 $eventImages = [
-    'ATHENS'   => 'https://athenscabs.com/wp-content/uploads/2025/03/Lycabettus-Theatre-Events.webp',
-    'BERN'     => 'https://a.storyblok.com/f/272028/4000x2667/098e994d94/01_bern_fanwalk_womens_euro_2025_c_berner-ballzauber_duy_tong.jpg',
-    'MILAN'    => 'https://en.locationamilano.it/media/location/thumb/min_97158382d74945338e1e5bedf83a40ec_1525862849.jpg',
-    'PARIS'    => 'https://pohcdn.com/sites/default/files/styles/node__blog_post__bp_banner/public/2021-05/Festivals-et-evenements-a-Paris.jpg',
-    'BUDAPEST' => 'https://www.corinthia.com/globalassets/hotel-budapest/images/discover-budapest/events-in-budapest_sziget-festival_credit-balazs-moha_szigetfestival.jpg',
+    'ATHENS'   => 'https://sneakerness.com/app/uploads/Naamloos-2-3-633x600.jpg',
+    'BERN'     => 'https://sneakerness.com/app/uploads/zrhweb6.jpg',
+    'MILAN'    => 'https://www.hoogstra-autosport.nl/teamkoen/wp-content/uploads/catalog/category/CrossschoenenMILAN.jpg',
+    'PARIS'    => 'https://sneakerstack.nl/wp-content/uploads/2023/12/Sneakerness-1024x1024.webp',
+    'BUDAPEST' => 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/80/de/a6/shoes-on-the-danube.jpg?w=1200&h=1200&s=1',
 ];
 ?>
 
