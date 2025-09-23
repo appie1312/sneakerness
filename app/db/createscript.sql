@@ -115,19 +115,16 @@ CREATE TABLE ContactPerVerkoper (
     ,FOREIGN KEY (ContactpersoonId) REFERENCES Contactpersoon(Id)
 );
 
--- Organisatoren
 INSERT INTO Organisator (Naam, Gebruikersnaam, Wachtwoord, Opmerking) VALUES
 ('EuroSneak Org', 'euroorg', 'passAthens1', 'Hoofd Athens editie'),
 ('Milano Hype', 'milanoorg', 'passMilan2', 'Organisator Milan editie'),
 ('Paris Street Events', 'parisorg', 'passParis3', 'Organisator Paris editie');
 
--- Bezoekers
 INSERT INTO Bezoeker (Naam, Emailadres, Opmerking) VALUES
 ('Maria Papadopoulos', 'maria.p@test.com', 'Bezoeker Athens event'),
 ('Luca Bianchi', 'luca.b@test.com', 'Bezoeker Milan event'),
 ('Anna Kovacs', 'anna.k@test.com', 'Bezoeker Budapest event');
 
--- Evenementen (NIET aangepast, blijft zoals jij hebt)
 INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands) VALUES
 ('Athens 2025',   '2025-10-10', 'Athens', 300, 40),
 ('Milan 2025',    '2025-11-15', 'Milan',  350, 50),
@@ -135,7 +132,6 @@ INSERT INTO Evenement (Naam, Datum, Locatie, AantalTicketsPerTijdslot, Beschikba
 ('Bern 2025',     '2025-11-22', 'Bern',   200, 25),
 ('Paris 2026',    '2026-03-14', 'Paris',  400, 55);
 
--- Prijzen (aansluitend bij events en datums)
 INSERT INTO Prijs (Datum, Tijdslot, Tarief, Opmerking) VALUES
 ('2025-10-10', 'Ochtend', 20.00, 'Athens ochtendtarief'),
 ('2025-10-10', 'Middag', 25.00, 'Athens middagtarief'),
@@ -144,31 +140,26 @@ INSERT INTO Prijs (Datum, Tijdslot, Tarief, Opmerking) VALUES
 ('2025-11-22', 'Ochtend', 18.00, 'Bern ochtendtarief'),
 ('2026-03-14', 'Middag', 35.00, 'Paris middagtarief');
 
--- Tickets (gekoppeld aan bezoekers, evenementen en prijzen)
 INSERT INTO Ticket (BezoekerId, EvenementId, PrijsId, AantalTickets, Datum, Opmerking) VALUES
 (1, 1, 1, 2, '2025-10-10', 'Samen met vriendin'),
 (2, 2, 3, 1, '2025-11-15', 'Solo bezoek'),
 (3, 3, 4, 3, '2025-11-08', 'Groep vrienden');
 
--- Verkopers
 INSERT INTO Verkoper (Naam, SpecialeStatus, VerkooptSoort, StandType, Dagen, Logo, Opmerking) VALUES
 ('Athens Kicks', TRUE, 'Sneakers', 'A', 'Eén dag', '', 'Populaire stand in Athens'),
 ('Milano Streetwear', FALSE, 'Kleding', 'AA', 'Twee dagen', '', 'Lokale modewinkel'),
 ('Paris Collectibles', FALSE, 'Accessoires', 'AA+', 'Eén dag', '', 'Speciale Paris editie');
 
--- Stands
 INSERT INTO Stand (VerkoperId, StandType, Prijs, VerhuurdStatus, Opmerking) VALUES
 (1, 'A', 200.00, TRUE, 'Verhuurd aan Athens Kicks'),
 (2, 'AA', 250.00, TRUE, 'Milano Streetwear stand'),
 (3, 'AA+', 300.00, FALSE, 'Paris stand nog beschikbaar');
 
--- Contactpersonen
 INSERT INTO Contactpersoon (Naam, Telefoonnummer, Emailadres, Opmerking) VALUES
 ('Nikos Stavros', '0611111111', 'nikos@test.com', 'Contact Athens Kicks'),
 ('Giulia Rossi', '0622222222', 'giulia@test.com', 'Contact Milano Streetwear'),
 ('Claire Dubois', '0633333333', 'claire@test.com', 'Contact Paris Collectibles');
 
--- ContactPerVerkoper
 INSERT INTO ContactPerVerkoper (VerkoperId, ContactpersoonId, Opmerking) VALUES
 (1, 1, 'Athens contactpersoon'),
 (2, 2, 'Milan contactpersoon'),
