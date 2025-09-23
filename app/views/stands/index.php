@@ -18,12 +18,12 @@
     </div>
 
     <div class="rail">
-      <div class="card">Stand A1</div>
-      <div class="card">Stand B4</div>
-      <div class="card">Stand C7</div>
-      <div class="card">Stand D2</div>
-      <div class="card">Stand E5</div>
-      <div class="card">Stand F3</div>
+      <div class="card">Stand Nike</div>
+      <div class="card">Stand Adidas</div>
+      <div class="card">Stand New-Balance</div>
+      <div class="card">Stand Skecher</div>
+      <div class="card">Stand Birkenstock</div>
+      <div class="card">Stand Vans</div>
     </div>
   </div>
 </body>
