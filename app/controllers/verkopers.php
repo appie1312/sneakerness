@@ -17,9 +17,7 @@ class Verkopers extends BaseController
         $verkopers = $this->verkoperModel->getAlleVerkopers();
 
 
-        require APPROOT . '/views/includes/header.php';
         require APPROOT . '/views/verkopers/index.php';
-        require APPROOT . '/views/includes/footer.php';
     }
 
 }

@@ -17,10 +17,6 @@
                 <th>Naam</th>
                 <th>Telefoon</th>
                 <th>Email</th>
-                <th>Status</th>
-                <th>Opmerking</th>
-                <th>Aangemaakt</th>
-                <th>Gewijzigd</th>
             </tr>
         </thead>
             <tbody>
@@ -34,10 +30,7 @@
                     <td><?= $contact['Naam'] ?></td>
                     <td><?= $contact['Telefoon'] ?></td>
                     <td><?= $contact['Email'] ?></td>
-                    <td><?= $contact['IsActief'] ? 'Actief' : 'Inactief' ?></td>
-                    <td><?= $contact['Opmerking'] ?></td>
-                    <td><?= $contact['Aangemaakt'] ?></td>
-                    <td><?= $contact['Gewijzigd'] ?></td>
+
                 </tr>
             <?php endforeach; ?>
             <?php endif; ?>
