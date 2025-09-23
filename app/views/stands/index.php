@@ -40,10 +40,6 @@
 <?php require APPROOT . '/views/includes/footer.php'; ?>
 </body>
 </html>
-
-
-  
-
 </body>
 </html>
 <?php require_once APPROOT . '/views/includes/footer.php'; ?>
