@@ -21,18 +21,18 @@
         </thead>
             <tbody>
             <?php if (empty($data['contact'])): ?>
-            <tr>
-                <td colspan="7" class="text-center">Er zijn geen contactpersonen.</td>
-            </tr>
-            <?php else: ?>
-            <?php foreach ($data['contact'] as $contact): ?>
                 <tr>
-                    <td><?= $contact['Naam'] ?></td>
-                    <td><?= $contact['Telefoonnummer'] ?></td>
-                    <td><?= $contact['Emailadres'] ?></td>
-
+                    <td colspan="7" class="text-center">Er zijn geen contactpersonen.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach ($data['contact'] as $contact): ?>
+                    <tr>
+                        <td><?= $contact['Naam'] ?></td>
+                        <td><?= $contact['Telefoonnummer'] ?></td>
+                        <td><?= $contact['Emailadres'] ?></td>
+
+                    </tr>
+                <?php endforeach; ?>
             <?php endif; ?>
             </tbody>
     </table>

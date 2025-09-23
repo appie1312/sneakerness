@@ -15,13 +15,13 @@
   </div>
 
   <div class="rail">
-    <?php if (empty($stands)): ?>
+    <?php if (empty($data['stands'])): ?>
       <div class="card">
         <h3>Geen stands gevonden</h3>
         <p>Er zijn momenteel geen actieve stands.</p>
       </div>
     <?php else: ?>
-      <?php foreach ($stands as $stand): ?>
+      <?php foreach ($data['stands'] as $stand): ?>
         <div class="card">
           <h3>Stand #<?= htmlspecialchars($stand['Id']) ?></h3>
           <p><strong>Type:</strong> <?= htmlspecialchars($stand['StandType']) ?></p>
