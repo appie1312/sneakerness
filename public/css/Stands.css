@@ -1,30 +1,59 @@
+/* --- Layout --- */
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
 
-    .wrap {
-      max-width: 1080px;
-      margin: auto;
-      padding: 20px 16px;
-    }
+.row-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
 
-    .row-title {
-      font-size: 28px;
-      font-weight: 800;
-    }
-    
-    .card {
-      margin-bottom: 10px;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 15px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100px;
-    }
+/* --- Grid container --- */
+.rail {
+  display: grid;
+  grid-template-columns: 1fr;         /* mobiel: 1 per rij */
+  gap: 16px;                          /* ruimte tussen kaarten */
+  align-items: stretch;
+}
 
-        .card:hover {
-      transform: translateY(-4px);
-      background-color: lightgray;
-    }
+/* Tablet en groter: 2 per rij */
+@media (min-width: 768px) {
+  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+.rail .card {
+  margin: 0;                          
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 140px;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.rail .card:hover {
+  transform: translateY(-4px);
+  background-color: #f6f6f6;
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+}
+
+.rail .card h3 {
+  margin: 6px 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+}
+

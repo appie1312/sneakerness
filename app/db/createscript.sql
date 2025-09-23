@@ -148,12 +148,16 @@ INSERT INTO Ticket (BezoekerId, EvenementId, PrijsId, AantalTickets, Datum, Opme
 INSERT INTO Verkoper (Naam, SpecialeStatus, VerkooptSoort, StandType, Dagen, Logo, Opmerking) VALUES
 ('Athens Kicks', TRUE, 'Sneakers', 'A', 'Eén dag', '', 'Populaire stand in Athens'),
 ('Milano Streetwear', FALSE, 'Kleding', 'AA', 'Twee dagen', '', 'Lokale modewinkel'),
-('Paris Collectibles', FALSE, 'Accessoires', 'AA+', 'Eén dag', '', 'Speciale Paris editie');
+('Paris Collectibles', FALSE, 'Accessoires', 'AA+', 'Eén dag', '', 'Speciale Paris editie'),
+('Budapest Vintage', TRUE, 'Vintage kleding', 'A', 'Twee dagen', '', 'Vintage specialist'),
+('Milan Artisans', FALSE, 'Handgemaakte items', 'AA', 'Eén dag', '', 'Lokale ambachtslieden');
 
 INSERT INTO Stand (VerkoperId, StandType, Prijs, VerhuurdStatus, Opmerking) VALUES
 (1, 'A', 200.00, TRUE, 'Verhuurd aan Athens Kicks'),
 (2, 'AA', 250.00, TRUE, 'Milano Streetwear stand'),
-(3, 'AA+', 300.00, FALSE, 'Paris stand nog beschikbaar');
+(3, 'AA+', 300.00, FALSE, 'Paris stand nog beschikbaar'),
+(4, 'AA+', 300.00, TRUE, 'Paris Collectibles stand'),
+(5, 'AA', 250.00, FALSE, 'Extra stand beschikbaar voor Milan event');
 
 INSERT INTO Contactpersoon (Naam, Telefoonnummer, Emailadres, Opmerking) VALUES
 ('Nikos Stavros', '0611111111', 'nikos@test.com', 'Contact Athens Kicks'),
