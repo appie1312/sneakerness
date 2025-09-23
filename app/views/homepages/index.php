@@ -26,8 +26,8 @@
         <p class="lead mb-4">in Rotterdam: het ultieme sneaker-event met art, sport, fashion, muziek en exclusieve
           sneakers. Tickets voor zaterdag en zondag beschikbaar.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-light btn-lg px-4 gap-3">Primary button</button>
-          <button type="button" class="btn btn-light btn-lg px-4">Secondary</button>
+          <button type="button" class="btn btn-light btn-lg px-4 gap-3" >bekijk alle tickets</button>
+          <button type="button" class="btn btn-light btn-lg px-4">ga naar events</button>
         </div>
       </div>
     </div>

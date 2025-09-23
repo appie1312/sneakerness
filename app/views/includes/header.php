@@ -1,3 +1,4 @@
+  <!-- dit is de navbar  -->
     <nav class="navbar navbar-expand-lg  bg-light bg-opacity-50">
       <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="/<?php echo URLROOT; ?>/homepages/index">SNEAKERNESS</a>
