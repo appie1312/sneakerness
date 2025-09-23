@@ -19,6 +19,9 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/event/index">events</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/contact/index">contactpersonen</a>
+            </li>
           </ul>
         </div>
       </div>
