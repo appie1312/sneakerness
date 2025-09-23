@@ -1,3 +1,4 @@
+  <!-- dit is de navbar  -->
     <nav class="navbar navbar-expand-lg  bg-light bg-opacity-50">
       <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="/<?php echo URLROOT; ?>/homepages/index">SNEAKERNESS</a>
@@ -18,6 +19,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/event/index">events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/<?php echo URLROOT; ?>/contact/index">contactpersonen</a>
             </li>
           </ul>
         </div>
