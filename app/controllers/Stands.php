@@ -4,7 +4,7 @@ class Stands extends BaseController
 {
     public function overzicht()
     {
-        $model = $this->stands('StandsModel');
+        $model = $this->model('StandsModel');
         $stands = $model->getStands();
 
         $data = [
