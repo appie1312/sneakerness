@@ -162,7 +162,9 @@ INSERT INTO Stand (VerkoperId, StandType, Prijs, VerhuurdStatus, Opmerking) VALU
 INSERT INTO Contactpersoon (Naam, Telefoonnummer, Emailadres, Opmerking) VALUES
 ('Nikos Stavros', '0611111111', 'nikos@test.com', 'Contact Athens Kicks'),
 ('Giulia Rossi', '0622222222', 'giulia@test.com', 'Contact Milano Streetwear'),
-('Claire Dubois', '0633333333', 'claire@test.com', 'Contact Paris Collectibles');
+('Claire Dubois', '0633333333', 'claire@test.com', 'Contact Paris Collectibles'),
+('Harbor hadelkamp', '0644444444', 'harbor@test.com', 'Contact Budapest Vintage');
+
 
 INSERT INTO ContactPerVerkoper (VerkoperId, ContactpersoonId, Opmerking) VALUES
 (1, 1, 'Athens contactpersoon'),
