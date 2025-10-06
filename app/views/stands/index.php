@@ -10,10 +10,14 @@
 <body>
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
 
+
 <div class="wrap">
   <div class="row-head">
     <div class="row-title">Aanwezige Stands</div>
   </div>
+
+  <div class="create-stand">
+    <a href="/<?php echo URLROOT; ?>/stands/create" class="btn btn-light">Nieuwe Stand Aanmaken</a>
 
   <div class="rail">
     <?php if (empty($data['stands'])): ?>
