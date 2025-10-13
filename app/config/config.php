@@ -17,3 +17,4 @@ define('URLROOT', '/sneakerness');
  * Het pad naar de folder app
  */
 define('APPROOT', dirname(dirname(__FILE__)));
+

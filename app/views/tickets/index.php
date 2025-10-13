@@ -11,6 +11,7 @@
 
 <div class="container mt-5 ">
     <h1 class="mb-4">Tickets</h1>
+    <a href="/<?php echo URLROOT; ?>/tickets/create" class="btn btn-primary mb-3">+ Nieuwe Ticket</a>
     <table class="table table-hover table-style">
         <thead class="table-active">
             <tr>
