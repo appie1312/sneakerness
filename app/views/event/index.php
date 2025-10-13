@@ -7,6 +7,13 @@ $eventImages = [
     'PARIS'    => 'https://sneakerstack.nl/wp-content/uploads/2023/12/Sneakerness-1024x1024.webp',
     'BUDAPEST' => 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/80/de/a6/shoes-on-the-danube.jpg?w=1200&h=1200&s=1',
 ];
+
+// $successMessage wordt door controller gezet (flash), maar fallback kan geen kwaad:
+if (!isset($successMessage)) {
+    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+    $successMessage = $_SESSION['flash_success'] ?? '';
+    if ($successMessage) { unset($_SESSION['flash_success']); }
+}
 ?>
 
 <!DOCTYPE html>
