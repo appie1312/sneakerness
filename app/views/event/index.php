@@ -22,6 +22,11 @@ $eventImages = [
 <body>
 <div class="events-page"> <!-- wrapper om styles te scopen -->
   <div class="container my-5">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 m-0">Events</h1>
+  <a href="<?= URLROOT; ?>/event/create" class="btn btn-dark btn-sm">Nieuw event</a>
+</div>
+
       <div class="events-grid row"> <!-- twee kolommen layout -->
           <!-- OUR EVENTS -->
           <div class="events-col col-md-6">
