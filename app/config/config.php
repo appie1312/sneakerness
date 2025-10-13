@@ -11,7 +11,7 @@ define('DB_PASS', '');
 /**
  * De naam van de virtualhost
  */
-define('URLROOT', '/sneakerness');
+define('URLROOT', 'http://sneakerness');
 
 /**
  * Het pad naar de folder app

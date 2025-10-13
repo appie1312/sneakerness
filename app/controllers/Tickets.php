@@ -27,12 +27,13 @@ class Tickets extends BaseController
         try {
             $this->TicketModel->delete($Id);
             header('Refresh:3; url=' . URLROOT . '/tickets/index');
-            exit;
+     
         } catch (Exception $e) {
             echo '<div class="alert alert-danger">Fout bij verwijderen: ' . $e->getMessage() . '</div>';
         }
     }
 
+    //create voor de ticket en prijs
 public function create()
 {
     $data = [
@@ -48,12 +49,12 @@ public function create()
                 empty($_POST['PrijsDatum']) ||
                 empty($_POST['PrijsTijdslot']) ||
                 empty($_POST['PrijsTarief']) ||
+                empty($_POST['PrijsOpmerking']) ||
                 empty($_POST['AantalTickets']) ||
                 empty($_POST['Datum'])
             ) {
                 echo '<div class="alert alert-danger text-center"><h4>Vul alle velden in</h4></div>';
-                header('Refresh:3; url=' . URLROOT . '/tickets/create');
-                exit;
+                header('Refresh:3; url=http://sneakerness/tickets/create');
             }
 
             $prijsId = $this->TicketModel->createPrijs($_POST);
@@ -62,8 +63,7 @@ public function create()
             $this->TicketModel->createTicket($_POST);
 
             echo '<div class="alert alert-success text-center"><h4>Ticket succesvol toegevoegd!</h4></div>';
-            header('Refresh:3; url=' . URLROOT . '/tickets/index');
-            exit;
+            header('Refresh:3; url=http://sneakerness/tickets/index');
 
         } catch (Exception $e) {
             echo '<div class="alert alert-danger text-center"><h4>Fout: ' . $e->getMessage() . '</h4></div>';

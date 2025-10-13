@@ -17,13 +17,13 @@
         <div class="mb-3">
             <label class="form-label">Kies Evenement</label>
             <select name="EvenementId" class="form-select">
-                <?php foreach($data['evenementen'] as $e): ?>
-                    <option value="<?php echo $e['Id']; ?>"><?php echo $e['Naam']; ?></option>
+                <?php foreach($data['evenementen'] as $evenement): ?>
+                    <option value="<?php echo $evenement['Id']; ?>"><?php echo $evenement['Naam']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
 
-        <h5>Prijs (nieuw aanmaken)</h5>
+        <h5>Prijs</h5>
         <div class="mb-3">
             <label class="form-label">Datum</label>
             <input type="date" name="PrijsDatum" class="form-control">

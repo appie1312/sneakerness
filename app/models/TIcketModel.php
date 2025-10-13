@@ -36,6 +36,7 @@ class TicketModel
         }
     }
 
+    
     public function getPrijzen()
     {
         try {
@@ -45,7 +46,7 @@ class TicketModel
             return [];
         }
     }
-
+// Maak een nieuwe prijs aan
     public function createPrijs($data)
 {
     try {
@@ -63,13 +64,13 @@ class TicketModel
     }
 }
 
+// Maak een nieuwe ticket aan
 public function createTicket($data)
 {
     try {
-        $sql = "INSERT INTO Ticket (BezoekerId, EvenementId, PrijsId, AantalTickets, Datum, IsActief, Opmerking)
-                VALUES (:bezoekerId, :evenementId, :prijsId, :aantalTickets, :datum, 1, :opmerking)";
+        $sql = "INSERT INTO Ticket (EvenementId, PrijsId, AantalTickets, Datum, IsActief, Opmerking)
+                VALUES (:evenementId, :prijsId, :aantalTickets, :datum, 1, :opmerking)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':bezoekerId', $data['BezoekerId']);
         $stmt->bindParam(':evenementId', $data['EvenementId']);
         $stmt->bindParam(':prijsId', $data['PrijsId']);
         $stmt->bindParam(':aantalTickets', $data['AantalTickets']);
