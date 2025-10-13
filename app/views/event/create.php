@@ -29,7 +29,7 @@ $defaultImage = URLROOT . '/public/img/placeholders/event-cover.webp';
     <div class="container my-5">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 m-0"><?= htmlspecialchars($pageTitle ?? 'Nieuw Event') ?></h1>
-            <a class="btn btn-outline-secondary btn-sm" href="<?= URLROOT; ?>/event/index">← Terug naar events</a>
+            <a class="btn btn-outline-secondary btn-sm" href="/<?= URLROOT; ?>/event/index">← Terug naar events</a>
         </div>
 
         <?php if (!empty($formErrors)): ?>
@@ -46,7 +46,7 @@ $defaultImage = URLROOT . '/public/img/placeholders/event-cover.webp';
             <div class="col-lg-7">
                 <div class="card border-0">
                     <div class="card-body p-4">
-                        <form id="eventForm" method="post" action="<?= URLROOT; ?>/event/store" novalidate>
+                        <form id="eventForm" method="post" action="/<?= URLROOT; ?>/event/store" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-8">
                                     <label class="form-label required">Naam</label>
@@ -122,7 +122,7 @@ $defaultImage = URLROOT . '/public/img/placeholders/event-cover.webp';
 <div class="container footer container-fluid">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3 ">
-      <li class="nav-item"><a href="<?= URLROOT; ?>" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="/<?= URLROOT; ?>" class="nav-link px-2 text-body-secondary">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
