@@ -32,6 +32,7 @@ class Event extends BaseController
 
         require APPROOT . '/views/event/index.php';
     }
+
     public function create(): void
     {
         $pageTitle = 'Nieuw Event';
@@ -45,7 +46,7 @@ class Event extends BaseController
     public function store(): void
 {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: ' . URLROOT . '/event/index');
+        header('Location: /' . URLROOT . '/event/index');
         exit;
     }
 
@@ -60,7 +61,7 @@ class Event extends BaseController
 
     $errors = [];
     if (trim($data['Naam']) === '') $errors[] = 'Naam is verplicht.';
-    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['Datum'])) $errors[] = 'Ongeldige datum.';
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['Datum'])) $errors[] = 'Ongeldige datum.'; //reguiler expression
     if (trim($data['Locatie']) === '') $errors[] = 'Locatie is verplicht.';
 
     // Dubbele NAAM check
@@ -82,7 +83,7 @@ class Event extends BaseController
     // Opslaan (model vult defaults voor verplichte velden)
     if ($this->eventModel->createEvent($data)) {
         $_SESSION['flash_success'] = 'Event succesvol toegevoegd.';
-        header('Location: ' . URLROOT . '/event/index');
+        header('Location: /' . URLROOT . '/event/index');
         exit;
     }
 
@@ -95,4 +96,5 @@ class Event extends BaseController
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/event/create.php';
 }
+
 }
