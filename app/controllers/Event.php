@@ -32,4 +32,67 @@ class Event extends BaseController
 
         require APPROOT . '/views/event/index.php';
     }
+    public function create(): void
+    {
+        $pageTitle = 'Nieuw Event';
+        $locations = $this->eventModel->getLocations();
+
+        require APPROOT . '/views/includes/header.php';
+        $locations = $locations;
+        require APPROOT . '/views/event/create.php';
+    }
+
+    public function store(): void
+{
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header('Location: ' . URLROOT . '/event/index');
+        exit;
+    }
+
+    // Sessie nodig voor flash
+    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+
+    $data = [
+        'Naam'    => $_POST['Naam'] ?? '',
+        'Datum'   => $_POST['Datum'] ?? '',
+        'Locatie' => $_POST['Locatie'] ?? '',
+    ];
+
+    $errors = [];
+    if (trim($data['Naam']) === '') $errors[] = 'Naam is verplicht.';
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['Datum'])) $errors[] = 'Ongeldige datum.';
+    if (trim($data['Locatie']) === '') $errors[] = 'Locatie is verplicht.';
+
+    // Dubbele NAAM check
+    if (empty($errors) && $this->eventModel->eventNameExists($data['Naam'])) {
+        $errors[] = 'Deze event bestaat al';
+    }
+
+    if ($errors) {
+        $pageTitle  = 'Nieuw Event';
+        $locations  = $this->eventModel->getLocations();
+        $formErrors = $errors;
+        $old        = $data;
+
+        require APPROOT . '/views/includes/header.php';
+        require APPROOT . '/views/event/create.php';
+        return;
+    }
+
+    // Opslaan (model vult defaults voor verplichte velden)
+    if ($this->eventModel->createEvent($data)) {
+        $_SESSION['flash_success'] = 'Event succesvol toegevoegd.';
+        header('Location: ' . URLROOT . '/event/index');
+        exit;
+    }
+
+    // Opslaan mislukt
+    $pageTitle  = 'Nieuw Event';
+    $locations  = $this->eventModel->getLocations();
+    $formErrors = ['Opslaan mislukt. Probeer opnieuw.'];
+    $old        = $data;
+
+    require APPROOT . '/views/includes/header.php';
+    require APPROOT . '/views/event/create.php';
+}
 }
