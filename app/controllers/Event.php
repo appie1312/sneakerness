@@ -46,8 +46,7 @@ class Event extends BaseController
     public function store(): void
 {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: /' . URLROOT . '/event/index');
-        exit;
+        header('Location: ' . URLROOT . '/event/index');
     }
 
     // Sessie nodig voor flash
@@ -83,8 +82,7 @@ class Event extends BaseController
     // Opslaan (model vult defaults voor verplichte velden)
     if ($this->eventModel->createEvent($data)) {
         $_SESSION['flash_success'] = 'Event succesvol toegevoegd.';
-        header('Location: /' . URLROOT . '/event/index');
-        exit;
+        header('Location: ' . URLROOT . '/event/index');
     }
 
     // Opslaan mislukt
