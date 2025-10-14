@@ -19,6 +19,12 @@
             </a>
         </div>
 
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+            <div class="alert alert-success">
+                Verkoper succesvol toegevoegd!
+            </div>
+        <?php endif; ?>
+
         <?php 
         try {
             if (empty($verkopers)) {
