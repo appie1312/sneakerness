@@ -8,32 +8,52 @@
 </head>
 <body>
     <?php require_once APPROOT . '/views/includes/header.php'; ?>
-    <h1>Overzicht van alle verkopers</h1>
-    <?php if (empty($verkopers)): ?>
-        <p>Momenteel geen verkopers in ons systeem.</p>
-    <?php else: ?>
-        <table class="table " border="1">
-            <tr>
-                <th>Naam</th>
-                <th>Speciale Status</th>
-                <th>Verkoopt Soort</th>
-                <th>Stand Type</th>
-                <th>Dagen</th>
-                <th>Opmerking</th>
-            </tr>
-            <?php foreach ($verkopers as $verkoper): ?>
-                <tr>
-                    <td><?= $verkoper-> Naam?></td>
-                    <td><?= $verkoper -> SpecialeStatus ? 'Ja' : 'Nee' ?></td>
-                    <td><?= $verkoper -> VerkooptSoort ?></td>
-                    <td><?= $verkoper -> StandType  ?></td>
-                    <td><?= $verkoper -> Dagen  ?></td>
-                    <td><?= $verkoper -> Opmerking ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+
+    <div class="container my-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Overzicht van alle verkopers</h1>
+
+            <!--Toevoeg knop -->
+            <a href="/<?php echo URLROOT; ?>/verkopers/create" class="btn btn-primary">
+                + Verkoper toevoegen
+            </a>
+        </div>
+
+        <?php 
+        try {
+            if (empty($verkopers)) {
+                echo "<p>Momenteel geen verkopers in ons systeem.</p>";
+            } else {
+                echo '<table class="table table-bordered table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Naam</th>
+                                <th>Speciale Status</th>
+                                <th>Verkoopt Soort</th>
+                                <th>Stand Type</th>
+                                <th>Dagen</th>
+                                <th>Opmerking</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+                foreach ($verkopers as $verkoper) {
+                    echo '<tr>
+                            <td>' . $verkoper->Naam . '</td>
+                            <td>' . ($verkoper->SpecialeStatus ? 'Ja' : 'Nee') . '</td>
+                            <td>' . $verkoper->VerkooptSoort . '</td>
+                            <td>' . $verkoper->StandType . '</td>
+                            <td>' . $verkoper->Dagen . '</td>
+                            <td>' . $verkoper->Opmerking . '</td>
+                          </tr>';
+                }
+                echo '</tbody></table>';
+            }
+        } catch (Exception $e) {
+            echo '<div class="alert alert-danger">Er is een fout opgetreden: ' . $e->getMessage() . '</div>';
+        }
+        ?>
+    </div>
     
-<?php require_once APPROOT . '/views/includes/footer.php'; ?>
+    <?php require_once APPROOT . '/views/includes/footer.php'; ?>
 </body>
 </html>
