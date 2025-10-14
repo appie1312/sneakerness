@@ -66,7 +66,7 @@ class Verkopers extends BaseController
         // Als alles goed is
         try {
             $this->verkoperModel->addVerkoper($data);
-            header("Location: /" . URLROOT . "/verkopers/index");
+            header("Location: " . URLROOT . "/verkopers/index");
             exit;
         } catch (Exception $e) {
             echo '<div class="alert alert-danger">Fout bij toevoegen van verkoper: ' . $e->getMessage() . '</div>';

@@ -14,7 +14,7 @@
             <h1>Overzicht van alle verkopers</h1>
 
             <!--Toevoeg knop -->
-            <a href="/<?php echo URLROOT; ?>/verkopers/create" class="btn btn-primary">
+            <a href="<?php echo URLROOT; ?>/verkopers/create" class="btn btn-primary">
                 + Verkoper toevoegen
             </a>
         </div>

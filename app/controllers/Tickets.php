@@ -46,15 +46,14 @@ public function create()
         try {
             if (
                 empty($_POST['EvenementId']) ||
-                empty($_POST['PrijsDatum']) ||
                 empty($_POST['PrijsTijdslot']) ||
                 empty($_POST['PrijsTarief']) ||
-                empty($_POST['PrijsOpmerking']) ||
                 empty($_POST['AantalTickets']) ||
                 empty($_POST['Datum'])
             ) {
                 echo '<div class="alert alert-danger text-center"><h4>Vul alle velden in</h4></div>';
-                header('Refresh:3; url=http://sneakerness/tickets/create');
+                header('Refresh:1; url=http://sneakerness/tickets/create');
+                exit;
             }
 
             $prijsId = $this->TicketModel->createPrijs($_POST);

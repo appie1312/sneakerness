@@ -4,7 +4,7 @@
 <div class="container my-5">
     <h1 class="mb-4">Nieuwe Verkoper Toevoegen</h1>
 
-    <form action="/<?php echo URLROOT; ?>/verkopers/store" method="POST">
+    <form action="<?php echo URLROOT; ?>/verkopers/store" method="POST">
 
         <!-- Naam -->
         <div class="mb-3">
@@ -77,7 +77,7 @@
         <!-- Buttons -->
         <div class="d-flex justify-content-start gap-2">
             <button type="submit" class="btn btn-success">Opslaan</button>
-            <a href="/<?php echo URLROOT; ?>/verkopers/index" class="btn btn-secondary">Annuleren</a>
+            <a href="<?php echo URLROOT; ?>/verkopers/index" class="btn btn-secondary">Annuleren</a>
         </div>
     </form>
 </div>
