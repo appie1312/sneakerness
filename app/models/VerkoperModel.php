@@ -12,7 +12,7 @@ class VerkoperModel
     public function getAlleVerkopers()
     {
         try {
-            $sql = "SELECT Id, Naam, SpecialeStatus, VerkooptSoort, StandType, Dagen, Logo, IsActief, Opmerking 
+            $sql = "SELECT Id, Naam, SpecialeStatus, VerkooptSoort, StandType, Dagen, IsActief, Opmerking 
                     FROM Verkoper";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
@@ -22,5 +22,35 @@ class VerkoperModel
             throw new Exception("Fout bij ophalen van verkopers: " . $e->getMessage());
         }
     }
+
+   public function addVerkoper($data)
+{
+    try {
+        $sql = "INSERT INTO Verkoper (Naam, SpecialeStatus, VerkooptSoort, StandType, Dagen, IsActief, Opmerking)
+                VALUES (:Naam, :SpecialeStatus, :VerkooptSoort, :StandType, :Dagen, :IsActief, :Opmerking)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($data);
+    } catch (PDOException $e) {
+        throw new Exception("Fout bij toevoegen verkoper: " . $e->getMessage());
+    }
+}
+
+
+// VerkoperModel.php
+    
+
+    public function bestaatVerkoper($naam)
+{
+        try {
+            $sql = "SELECT COUNT(*) as aantal FROM Verkoper WHERE Naam = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$naam]);
+            $result = $stmt->fetch(PDO::FETCH_OBJ);
+            return $result->aantal > 0;
+        } catch (PDOException $e) {
+            throw new Exception("Fout bij controleren verkoper: " . $e->getMessage());
+        }
+}
+
 }
 

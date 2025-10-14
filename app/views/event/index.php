@@ -7,7 +7,21 @@ $eventImages = [
     'PARIS'    => 'https://sneakerstack.nl/wp-content/uploads/2023/12/Sneakerness-1024x1024.webp',
     'BUDAPEST' => 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/80/de/a6/shoes-on-the-danube.jpg?w=1200&h=1200&s=1',
 ];
+
+// $successMessage wordt door controller gezet (flash), maar fallback kan geen kwaad:
+if (!isset($successMessage)) {
+    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+    $successMessage = $_SESSION['flash_success'] ?? '';
+    if ($successMessage) { unset($_SESSION['flash_success']); }
+}
 ?>
+
+<?php if (!empty($successMessage)): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <?= htmlspecialchars($successMessage) ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +36,11 @@ $eventImages = [
 <body>
 <div class="events-page"> <!-- wrapper om styles te scopen -->
   <div class="container my-5">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 m-0">Events</h1>
+  <a href="<?= URLROOT; ?>/event/create" class="btn btn-dark btn-sm">Nieuw event</a>
+</div>
+
       <div class="events-grid row"> <!-- twee kolommen layout -->
           <!-- OUR EVENTS -->
           <div class="events-col col-md-6">
@@ -94,9 +113,27 @@ $eventImages = [
       </div>
   </div>
 </div>
+
+
+
  
 <div class="container footer container-fluid"> <footer class="py-3 my-4"> <ul class="nav justify-content-center border-bottom pb-3 mb-3 "> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li> </ul> <p class="text-center text-body-secondary">© 2025 Company, Inc</p> </footer> </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<script>
+  // Automatisch Bootstrap-alert sluiten na 3 seconden
+  document.addEventListener('DOMContentLoaded', () => {
+    const alertEl = document.querySelector('.alert.alert-success');
+    if (alertEl) {
+      setTimeout(() => {
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
+        bsAlert.close();
+      }, 3000); // sluit na 3 seconden
+    }
+  });
+</script>
 
 </body>
 </html>
