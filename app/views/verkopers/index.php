@@ -20,9 +20,31 @@
         </div>
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-            <div class="alert alert-success">
+            <div id="success-alert" class="alert alert-success">
                 Verkoper succesvol toegevoegd!
             </div>
+            <script>
+                setTimeout(function() {
+                    var alert = document.getElementById('success-alert');
+                    if (alert) {
+                        alert.style.display = 'none';
+                    }
+                }, 3000);
+            </script>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'exists'): ?>
+            <div id="error-alert" class="alert alert-danger">
+                Verkoper bestaat al hij is niet toegevoegd!
+            </div>
+            <script>
+                setTimeout(function() {
+                    var alert = document.getElementById('error-alert');
+                    if (alert) {
+                        alert.style.display = 'none';
+                    }
+                }, 3000);
+            </script>
         <?php endif; ?>
 
         <?php 

@@ -36,5 +36,21 @@ class VerkoperModel
 }
 
 
+// VerkoperModel.php
+    
+
+    public function bestaatVerkoper($naam)
+{
+        try {
+            $sql = "SELECT COUNT(*) as aantal FROM Verkoper WHERE Naam = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$naam]);
+            $result = $stmt->fetch(PDO::FETCH_OBJ);
+            return $result->aantal > 0;
+        } catch (PDOException $e) {
+            throw new Exception("Fout bij controleren verkoper: " . $e->getMessage());
+        }
+}
+
 }
 

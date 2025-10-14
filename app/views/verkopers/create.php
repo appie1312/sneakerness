@@ -77,7 +77,7 @@
         <!-- Buttons -->
         <div class="d-flex justify-content-start gap-2">
             <button type="submit" class="btn btn-success">Opslaan</button>
-            <a href="/<?php echo URLROOT; ?>/verkopers/index" class="btn btn-secondary">Annuleren</a>
+            <a href="<?php echo URLROOT; ?>/verkopers/index" class="btn btn-secondary">Annuleren</a>
         </div>
     </form>
 </div>

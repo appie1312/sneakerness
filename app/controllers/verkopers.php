@@ -63,10 +63,17 @@ class Verkopers extends BaseController
             return;
         }
 
+        
+        // ... na validatie en vóór het toevoegen:
+        if ($this->verkoperModel->bestaatVerkoper($data['Naam'])) {
+            header("Location: /" . URLROOT . "/verkopers/index?error=exists");
+            exit;
+        }
+
         // Als alles goed is
         try {
             $this->verkoperModel->addVerkoper($data);
-            header("Location: /" . URLROOT . "/verkopers/index");
+            header("Location: /" . URLROOT . "/verkopers/index?success=1");
             exit;
         } catch (Exception $e) {
             echo '<div class="alert alert-danger">Fout bij toevoegen van verkoper: ' . $e->getMessage() . '</div>';
