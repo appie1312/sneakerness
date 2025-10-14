@@ -63,6 +63,13 @@ class Verkopers extends BaseController
             return;
         }
 
+        
+        // ... na validatie en vóór het toevoegen:
+        if ($this->verkoperModel->bestaatVerkoper($data['Naam'])) {
+            header("Location: /" . URLROOT . "/verkopers/index?error=exists");
+            exit;
+        }
+
         // Als alles goed is
         try {
             $this->verkoperModel->addVerkoper($data);
