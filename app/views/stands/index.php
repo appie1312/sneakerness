@@ -35,6 +35,11 @@
             <p><strong>Opmerking:</strong> <?= htmlspecialchars($stand['Opmerking']) ?></p>
           <?php endif; ?>
           <p><em>Aangemaakt:</em> <?= htmlspecialchars($stand['DatumAangemaakt']) ?></p>
+
+          <div class="d-flex gap-2 mt-3">
+            <a href="<?= URLROOT ?>/stands/edit/<?= (int)$stand['Id'] ?>" class="btn btn-sm btn-warning">Wijzigen</a>
+            <a href="<?= URLROOT ?>/stands/delete/<?= (int)$stand['Id'] ?>" class="btn btn-sm btn-danger">Verwijderen</a>
+          </div>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>

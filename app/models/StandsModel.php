@@ -102,4 +102,51 @@ class StandsModel
             throw new Exception("Fout bij toevoegen stand: " . $e->getMessage(), 0, $e);
         }
     }
+
+        public function getStandById(int $id): ?array
+    {
+        $sql = "SELECT * FROM Stand WHERE Id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        return $row ?: null;
+    }
+
+    public function updateStand(array $data): bool
+    {
+        $sql = "UPDATE Stand
+                SET VerkoperId = :verkoperId,
+                    StandType = :standType,
+                    Prijs = :prijs,
+                    VerhuurdStatus = :verhuurdStatus,
+                    Opmerking = :opmerking,
+                    DatumGewijzigd = NOW()
+                WHERE Id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $data['Id'], PDO::PARAM_INT);
+        $stmt->bindValue(':verkoperId', $data['VerkoperId'], PDO::PARAM_INT);
+        $stmt->bindValue(':standType', $data['StandType'], PDO::PARAM_STR);
+        $stmt->bindValue(':prijs', (string)$data['Prijs'], PDO::PARAM_STR);
+        $stmt->bindValue(':verhuurdStatus', $data['VerhuurdStatus'], PDO::PARAM_INT);
+
+        if ($data['Opmerking'] === '') {
+            $stmt->bindValue(':opmerking', null, PDO::PARAM_NULL);
+        } else {
+            $stmt->bindValue(':opmerking', $data['Opmerking'], PDO::PARAM_STR);
+        }
+
+        return $stmt->execute();
+    }
+
+    public function deleteStand(int $id): bool
+    {
+        $sql = "DELETE FROM Stand WHERE Id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+        // Als je liever soft-delete gebruikt:
+        // $sql = "UPDATE Stand SET IsActief = 0, DatumGewijzigd = NOW() WHERE Id = :id";
+    }
+
 }
