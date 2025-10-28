@@ -88,5 +88,4 @@ class EventModel {
 
         return $st->execute();
     }
-
 }
