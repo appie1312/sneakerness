@@ -74,7 +74,7 @@ if (!isset($successMessage)) {
                                                 <!-- voeg hier evt. extra metadata toe -->
                                             </div>
                                             <a href="<?= URLROOT; ?>/event/<?= (int)$event['Id']; ?>" class="btn btn-dark btn-sm">Buy Tickets</a>
-                                            <a href="<?= URLROOT; ?>/evenst/wijzigen.php?id=<?= (int)$event['Id']; ?>" class="btn btn-outline-secondary btn-sm ms-2 "> <img src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png" alt="wijzigen" style="width:16px; height:16px;">
+                                            <a href="<?= URLROOT; ?>/event/wijzigen.php?id=<?= (int)$event['Id']; ?>" class="btn btn-outline-secondary btn-sm ms-2 "> <img src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png" alt="wijzigen" style="width:16px; height:16px;">
                                         </div>
                                     </div>
                                 </div>
