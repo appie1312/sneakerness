@@ -88,4 +88,38 @@ class EventModel {
 
         return $st->execute();
     }
+    public function updateEvent(int $id, array $data): bool
+    {
+        $sql = "UPDATE Evenement e
+            INNER JOIN Locatie l ON e.Locatie = l.Naam
+            SET
+                e.Naam = :Naam,
+                e.Datum = :Datum,
+                e.Locatie = :Locatie,
+                e.AantalTicketsPerTijdslot = :Tickets,
+                e.BeschikbareStands = :Stands,
+                e.IsActief = :IsActief,
+                e.Opmerking = :Opmerking
+            WHERE e.ID = :ID
+              AND l.Capaciteit > 0"; // optioneel filter
+
+        $st = $this->db->prepare($sql);
+
+        $st->bindValue(':Naam',     trim($data['Naam']),    PDO::PARAM_STR);
+        $st->bindValue(':Datum',    $data['Datum'],         PDO::PARAM_STR);
+        $st->bindValue(':Locatie',  trim($data['Locatie']), PDO::PARAM_STR);
+        $st->bindValue(':Tickets',  (int)($data['Tickets'] ?? 1),  PDO::PARAM_INT);
+        $st->bindValue(':Stands',   (int)($data['Stands']  ?? 0),  PDO::PARAM_INT);
+        $st->bindValue(':IsActief', (int)($data['IsActief'] ?? 1),  PDO::PARAM_INT);
+
+        if (isset($data['Opmerking']) && $data['Opmerking'] !== '') {
+            $st->bindValue(':Opmerking', $data['Opmerking'], PDO::PARAM_STR);
+        } else {
+            $st->bindValue(':Opmerking', null, PDO::PARAM_NULL);
+        }
+
+        $st->bindValue(':ID', $id, PDO::PARAM_INT);
+
+        return $st->execute();
+    }
 }
