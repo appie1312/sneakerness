@@ -94,5 +94,56 @@ class Event extends BaseController
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/event/create.php';
 }
+    public function edit($id)
+    {
+        $event = $this->eventModel->getEvent((int)$id);
+        if (!$event) { /* 404 / redirect */
+        }
+        $locations = $this->eventModel->getLocations();
+        $this->view('event/edit', [
+            'pageTitle' => 'Event Wijzigen',
+            'event' => $event,
+            'locations' => $locations,
+        ]);
+    }
 
+    public function update($id)
+    {
+        $id = (int)$id;
+        $data = [
+            'Naam' => trim($_POST['Naam'] ?? ''),
+            'Datum' => $_POST['Datum'] ?? '',
+            'Locatie' => trim($_POST['Locatie'] ?? ''),
+            // evt. andere velden
+        ];
+
+        $errors = [];
+        if ($data['Naam'] === '') $errors[] = 'Naam is verplicht';
+        if ($data['Datum'] === '') $errors[] = 'Datum is verplicht';
+        if ($data['Locatie'] === '') $errors[] = 'Locatie is verplicht';
+
+        // Unieke naam check, maar eigen record uitsluiten:
+        if ($this->eventModel->eventNameExistsForOtherId($data['Naam'], $id)) {
+            $errors[] = 'Deze event bestaat al';
+        }
+
+        if ($errors) {
+            $event = $this->eventModel->getEvent($id);
+            $locations = $this->eventModel->getLocations();
+            $this->view('event/edit', [
+                'pageTitle' => 'Event Wijzigen',
+                'event' => $event,
+                'locations' => $locations,
+                'formErrors' => $errors,
+                'old' => $data,
+            ]);
+            return;
+        }
+
+        if ($this->eventModel->updateEvent($id, $data)) {
+            redirect('event/index');
+        } else {
+            // foutafhandeling
+        }
+    }
 }
