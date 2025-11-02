@@ -88,6 +88,15 @@ class EventModel {
 
         return $st->execute();
     }
+
+    public function getById(int $id): ?array
+    {
+        $st = $this->db->prepare("SELECT * FROM Evenement WHERE Id = :id LIMIT 1");
+        $st->bindValue(':id', $id, PDO::PARAM_INT);
+        $st->execute();
+        $row = $st->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
     public function canDeleteEventDetailed(int $id): array
     {
         $st = $this->db->prepare("SELECT Datum FROM Evenement WHERE Id = :id");
