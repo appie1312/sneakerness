@@ -94,5 +94,49 @@ class Event extends BaseController
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/event/create.php';
 }
+    public function delete(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
+        if (strtoupper($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+            $_SESSION['flash_error'] = 'Ongeldige actie: verwijderen moet via POST.';
+            header('Location: ' . URLROOT . '/event/index');
+            exit;
+        }
+
+        $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+        if ($id <= 0) {
+            $_SESSION['flash_error'] = 'Geen event-ID meegegeven.';
+            header('Location: ' . URLROOT . '/event/index');
+            exit;
+        }
+
+        $event = $this->eventModel->getById($id);
+        if (!$event) {
+            $_SESSION['flash_error'] = 'Event niet gevonden.';
+            header('Location: ' . URLROOT . '/event/index');
+            exit;
+        }
+
+        $check = $this->eventModel->canDeleteEventDetailed($id);
+        if (!$check['allowed']) {
+            // ❌ Melding wanneer datum ≤ 45 dagen
+            $_SESSION['flash_error'] = 'Deze event kan niet verwijderd worden want datum is bekend gemaakt voor Bezoekers.';
+            header('Location: ' . URLROOT . '/event/index');
+            exit;
+        }
+
+        if ($this->eventModel->deleteEvent($id)) {
+            // ✅ Melding wanneer datum > 45 dagen
+            $_SESSION['flash_success'] = 'Event succes vol verwijderd.';
+            header('Location: ' . URLROOT . '/event/index');
+            exit;
+        }
+
+        $_SESSION['flash_error'] = 'Verwijderen is mislukt (er is niets gewijzigd).';
+        header('Location: ' . URLROOT . '/event/index');
+        exit;
+    }
 }

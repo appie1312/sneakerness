@@ -89,4 +89,53 @@ class EventModel {
         return $st->execute();
     }
 
+    public function getById(int $id): ?array
+    {
+        $st = $this->db->prepare("SELECT * FROM Evenement WHERE Id = :id LIMIT 1");
+        $st->bindValue(':id', $id, PDO::PARAM_INT);
+        $st->execute();
+        $row = $st->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
+    public function canDeleteEventDetailed(int $id): array
+    {
+        $st = $this->db->prepare("SELECT Datum FROM Evenement WHERE Id = :id");
+        $st->bindValue(':id', $id, \PDO::PARAM_INT);
+        $st->execute();
+        $row = $st->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return ['allowed' => false, 'reason' => 'Event niet gevonden.'];
+        }
+
+        $todayTs = strtotime(date('Y-m-d'));
+        $eventTs = strtotime((string)$row['Datum']);
+
+        if ($eventTs === false) {
+            return ['allowed' => false, 'reason' => 'Ongeldige eventdatum.'];
+        }
+
+        $diffDays = (int) floor(($eventTs - $todayTs) / 86400);
+
+        if ($diffDays > 45) {
+            return ['allowed' => true, 'reason' => null];
+        }
+
+        return [
+            'allowed' => false,
+            'reason'  => 'Deze event kan niet verwijderd worden want datum is bekend gemaakt voor Bezoekers.'
+        ];
+    }
+
+    public function deleteEvent(int $id): bool
+    {
+        try {
+            $st = $this->db->prepare("DELETE FROM Evenement WHERE Id = :id");
+            $st->bindValue(':id', $id, PDO::PARAM_INT);
+            $st->execute();
+            return $st->rowCount() === 1;
+        } catch (\Throwable $e) {
+            return false;
+        }
+    }
 }
