@@ -26,6 +26,22 @@ class TicketModel
         }
     }
 
+    public function getTicketById($id)
+    {
+        try {
+            $sql = "SELECT Id, EvenementId, PrijsId, AantalTickets, Datum, IsActief, Opmerking
+                    FROM Ticket
+                    WHERE Id = :id LIMIT 1";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ?: null;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
     public function getEvenementen()
     {
         try {
@@ -64,7 +80,6 @@ class TicketModel
     }
 }
 
-// Maak een nieuwe ticket aan
 public function createTicket($data)
 {
     try {
@@ -83,6 +98,39 @@ public function createTicket($data)
     }
 }
     
+    public function updateTicket($post)
+    {
+        try {
+            $sql = "UPDATE Ticket
+                    SET EvenementId = :evenementId,
+                        PrijsId = :prijsId,
+                        AantalTickets = :aantalTickets,
+                        Datum = :datum,
+                        Opmerking = :opmerking,
+                        IsActief = :isActief
+                    WHERE Id = :id";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':evenementId', $post['EvenementId'], PDO::PARAM_INT);
+            $stmt->bindParam(':prijsId', $post['PrijsId'], PDO::PARAM_INT);
+            $stmt->bindParam(':aantalTickets', $post['AantalTickets'], PDO::PARAM_INT);
+            $stmt->bindParam(':datum', $post['Datum'], PDO::PARAM_STR);
+            $stmt->bindParam(':opmerking', $post['Opmerking'], PDO::PARAM_STR);
+            $isActief = isset($post['IsActief']) ? (int)$post['IsActief'] : 1;
+            $stmt->bindParam(':isActief', $isActief, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $post['Id'], PDO::PARAM_INT);
+
+            $success = $stmt->execute();
+            if ($success) {
+                // retourneer aantal gewijzigde rijen (0 = geen verandering)
+                return $stmt->rowCount();
+            }
+            return false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
 
     public function delete($Id)
     {
