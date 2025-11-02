@@ -110,6 +110,10 @@ if (!isset($successMessage)) {
                                                 <?= date('F Y', strtotime($event['Datum'])); ?>
                                             </p>
                                             <span class="tag badge bg-secondary">Coming Soon</span>
+                                            <a href="<?= URLROOT; ?>/event/wijzigen/<?= (int)$event['Id']; ?>" class="btn btn-outline-secondary btn-sm ms-2">
+                                                <img src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png" alt="wijzigen" style="width:16px; height:16px;">
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
