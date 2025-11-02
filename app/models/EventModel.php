@@ -97,4 +97,39 @@ class EventModel
 
         return $st->execute();
     }
+    public function getById(int $id): ?array
+    {
+        $st = $this->db->prepare("SELECT * FROM Evenement WHERE Id = :id LIMIT 1");
+        $st->bindValue(':id', $id, PDO::PARAM_INT);
+        $st->execute();
+        $row = $st->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
+
+    public function eventNameExistsExceptId(string $naam, int $id): bool
+    {
+        $sql = "SELECT 1 FROM Evenement 
+            WHERE LOWER(Naam) = LOWER(:naam) AND Id <> :id
+            LIMIT 1";
+        $st  = $this->db->prepare($sql);
+        $st->bindValue(':naam', trim($naam), PDO::PARAM_STR);
+        $st->bindValue(':id', $id, PDO::PARAM_INT);
+        $st->execute();
+        return (bool) $st->fetchColumn();
+    }
+
+    public function updateEvent(int $id, array $data): bool
+    {
+        $sql = "UPDATE Evenement
+            SET Naam = :Naam,
+                Datum = :Datum,
+                Locatie = :Locatie
+            WHERE Id = :Id";
+        $st = $this->db->prepare($sql);
+        $st->bindValue(':Naam',     trim($data['Naam']),    PDO::PARAM_STR);
+        $st->bindValue(':Datum',    $data['Datum'],         PDO::PARAM_STR); // 'YYYY-MM-DD'
+        $st->bindValue(':Locatie',  trim($data['Locatie']), PDO::PARAM_STR);
+        $st->bindValue(':Id',       $id,                    PDO::PARAM_INT);
+        return $st->execute();
+    }
 }
