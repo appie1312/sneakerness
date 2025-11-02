@@ -44,106 +44,56 @@ class Event extends BaseController
     }
 
     public function store(): void
-{
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: ' . URLROOT . '/event/index');
-    }
-
-    // Sessie nodig voor flash
-    if (session_status() === PHP_SESSION_NONE) { session_start(); }
-
-    $data = [
-        'Naam'    => $_POST['Naam'] ?? '',
-        'Datum'   => $_POST['Datum'] ?? '',
-        'Locatie' => $_POST['Locatie'] ?? '',
-    ];
-
-    $errors = [];
-    if (trim($data['Naam']) === '') $errors[] = 'Naam is verplicht.';
-    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['Datum'])) $errors[] = 'Ongeldige datum.'; //reguiler expression
-    if (trim($data['Locatie']) === '') $errors[] = 'Locatie is verplicht.';
-
-    // Dubbele NAAM check
-    if (empty($errors) && $this->eventModel->eventNameExists($data['Naam'])) {
-        $errors[] = 'Deze event bestaat al';
-    }
-
-    if ($errors) {
-        $pageTitle  = 'Nieuw Event';
-        $locations  = $this->eventModel->getLocations();
-        $formErrors = $errors;
-        $old        = $data;
-
-        require APPROOT . '/views/includes/header.php';
-        require APPROOT . '/views/event/create.php';
-        return;
-    }
-
-    // Opslaan (model vult defaults voor verplichte velden)
-    if ($this->eventModel->createEvent($data)) {
-        $_SESSION['flash_success'] = 'Event succesvol toegevoegd.';
-        header('Location: ' . URLROOT . '/event/index');
-    }
-
-    // Opslaan mislukt
-    $pageTitle  = 'Nieuw Event';
-    $locations  = $this->eventModel->getLocations();
-    $formErrors = ['Opslaan mislukt. Probeer opnieuw.'];
-    $old        = $data;
-
-    require APPROOT . '/views/includes/header.php';
-    require APPROOT . '/views/event/create.php';
-}
-    public function edit($id)
     {
-        $event = $this->eventModel->getEvent((int)$id);
-        if (!$event) { /* 404 / redirect */
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ' . URLROOT . '/event/index');
         }
-        $locations = $this->eventModel->getLocations();
-        $this->view('event/edit', [
-            'pageTitle' => 'Event Wijzigen',
-            'event' => $event,
-            'locations' => $locations,
-        ]);
-    }
 
-    public function update($id)
-    {
-        $id = (int)$id;
+        // Sessie nodig voor flash
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $data = [
-            'Naam' => trim($_POST['Naam'] ?? ''),
-            'Datum' => $_POST['Datum'] ?? '',
-            'Locatie' => trim($_POST['Locatie'] ?? ''),
-            // evt. andere velden
+            'Naam'    => $_POST['Naam'] ?? '',
+            'Datum'   => $_POST['Datum'] ?? '',
+            'Locatie' => $_POST['Locatie'] ?? '',
         ];
 
         $errors = [];
-        if ($data['Naam'] === '') $errors[] = 'Naam is verplicht';
-        if ($data['Datum'] === '') $errors[] = 'Datum is verplicht';
-        if ($data['Locatie'] === '') $errors[] = 'Locatie is verplicht';
+        if (trim($data['Naam']) === '') $errors[] = 'Naam is verplicht.';
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['Datum'])) $errors[] = 'Ongeldige datum.'; //reguiler expression
+        if (trim($data['Locatie']) === '') $errors[] = 'Locatie is verplicht.';
 
-        // Unieke naam check, maar eigen record uitsluiten:
-        if ($this->eventModel->eventNameExistsForOtherId($data['Naam'], $id)) {
+        // Dubbele NAAM check
+        if (empty($errors) && $this->eventModel->eventNameExists($data['Naam'])) {
             $errors[] = 'Deze event bestaat al';
         }
 
         if ($errors) {
-            $event = $this->eventModel->getEvent($id);
-            $locations = $this->eventModel->getLocations();
-            $this->view('event/edit', [
-                'pageTitle' => 'Event Wijzigen',
-                'event' => $event,
-                'locations' => $locations,
-                'formErrors' => $errors,
-                'old' => $data,
-            ]);
+            $pageTitle  = 'Nieuw Event';
+            $locations  = $this->eventModel->getLocations();
+            $formErrors = $errors;
+            $old        = $data;
+
+            require APPROOT . '/views/includes/header.php';
+            require APPROOT . '/views/event/create.php';
             return;
         }
 
-        if ($this->eventModel->updateEvent($id, $data)) {
-            redirect('event/index');
-        } else {
-            // foutafhandeling
+        // Opslaan (model vult defaults voor verplichte velden)
+        if ($this->eventModel->createEvent($data)) {
+            $_SESSION['flash_success'] = 'Event succesvol toegevoegd.';
+            header('Location: ' . URLROOT . '/event/index');
         }
+
+        // Opslaan mislukt
+        $pageTitle  = 'Nieuw Event';
+        $locations  = $this->eventModel->getLocations();
+        $formErrors = ['Opslaan mislukt. Probeer opnieuw.'];
+        $old        = $data;
+
+        require APPROOT . '/views/includes/header.php';
+        require APPROOT . '/views/event/create.php';
     }
 }
