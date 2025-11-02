@@ -117,4 +117,16 @@ class EventModel {
             'reason'  => 'Deze event kan niet verwijderd worden want datum is bekend gemaakt voor Bezoekers.'
         ];
     }
+
+    public function deleteEvent(int $id): bool
+    {
+        try {
+            $st = $this->db->prepare("DELETE FROM Evenement WHERE Id = :id");
+            $st->bindValue(':id', $id, PDO::PARAM_INT);
+            $st->execute();
+            return $st->rowCount() === 1;
+        } catch (\Throwable $e) {
+            return false;
+        }
+    }
 }
