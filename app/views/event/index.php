@@ -51,21 +51,6 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 </head>
 
 <body>
-
-    <?php if ($successMessage): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?= htmlspecialchars($successMessage) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if ($errorMessage): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?= htmlspecialchars($errorMessage) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-
-
     <div class="events-page"> <!-- wrapper om styles te scopen -->
         <div class="container my-5">
             <div class="d-flex align-items-center justify-content-between mb-4">
@@ -81,7 +66,6 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
                     <div class="card-grid row row-cols-1 row-cols-md-2 g-4">
                         <?php if (!empty($ourEvents)): ?>
                             <?php foreach ($ourEvents as $event): ?>
-
                                 <?php
                                 $loc = strtoupper(trim($event['Locatie']));
                                 $imgSrc = $eventImages[$loc] ?? URLROOT . '/public/img/placeholders/event-cover.webp';
@@ -100,15 +84,10 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
                                             <div class="event-meta muted">
                                                 <!-- voeg hier evt. extra metadata toe -->
                                             </div>
-                                            <a href="<?= URLROOT; ?>/event/<?= $event['Id']; ?>" class="btn btn-dark btn-sm">Buy Tickets</a>
-                                            <button type="button"
-                                                class="btn btn-outline-danger btn-sm ms-2 js-delete"
-                                                data-id="<?= (int)$event['Id']; ?>"
-                                                title="Verwijderen">
-                                                <img src="https://www.iconarchive.com/download/i103472/paomedia/small-n-flat/sign-delete.1024.png"
-                                                    alt="verwijderen" style="width:16px;height:16px;">
-                                            </button>
-
+                                            <a href="<?= URLROOT; ?>/event/<?= (int)$event['Id']; ?>" class="btn btn-dark btn-sm">Buy Tickets</a>
+                                            <a href="<?= URLROOT; ?>/event/wijzigen/<?= (int)$event['Id']; ?>" class="btn btn-outline-secondary btn-sm ms-2">
+                                                <img src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png" alt="wijzigen" style="width:16px; height:16px;">
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -142,13 +121,10 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
                                                 <?= date('F Y', strtotime($event['Datum'])); ?>
                                             </p>
                                             <span class="tag badge bg-secondary">Coming Soon</span>
-                                            <button type="button"
-                                                class="btn btn-outline-danger btn-sm ms-2 js-delete"
-                                                data-id="<?= (int)$event['Id']; ?>"
-                                                title="Verwijderen">
-                                                <img src="https://www.iconarchive.com/download/i103472/paomedia/small-n-flat/sign-delete.1024.png"
-                                                    alt="verwijderen" style="width:16px;height:16px;">
-                                            </button>
+                                            <a href="<?= URLROOT; ?>/event/wijzigen/<?= (int)$event['Id']; ?>" class="btn btn-outline-secondary btn-sm ms-2">
+                                                <img src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png" alt="wijzigen" style="width:16px; height:16px;">
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -162,9 +138,7 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
         </div>
     </div>
 
-    <form id="deleteFormGlobal" method="post" action="<?= URLROOT; ?>/event/delete" style="display:none">
-        <input type="hidden" name="id" id="deleteFormGlobalId">
-    </form>
+
 
 
     <div class="container footer container-fluid">
@@ -195,35 +169,6 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
             }
         });
     </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sluit alerts na 3s (optioneel)
-            document.querySelectorAll('.alert.alert-success, .alert.alert-danger').forEach(function(el) {
-                setTimeout(function() {
-                    var bsAlert = bootstrap.Alert.getOrCreateInstance(el);
-                    bsAlert.close();
-                }, 3000);
-            });
-
-            // Delete-flow: centrale POST form
-            var globalForm = document.getElementById('deleteFormGlobal');
-            var globalId = document.getElementById('deleteFormGlobalId');
-
-            document.querySelectorAll('.js-delete').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var id = this.getAttribute('data-id');
-                    if (!id) return;
-
-                    if (confirm('Weet je zeker dat je dit event wilt verwijderen?')) {
-                        globalId.value = id;
-                        globalForm.submit(); // echte POST naar /event/delete met id
-                    }
-                });
-            });
-        });
-    </script>
-
 
 </body>
 

@@ -1,15 +1,20 @@
 <?php
+
 namespace App\Model;
+
 use PDO;
 
-class EventModel {
+class EventModel
+{
     private PDO $db;
 
-    public function __construct(PDO $db) {
+    public function __construct(PDO $db)
+    {
         $this->db = $db;
     }
 
-    public function getCurrentEvents(int $days = 45): array {
+    public function getCurrentEvents(int $days = 45): array
+    {
         $sql = "SELECT * FROM Evenement
                 WHERE IsActief = 1
                   AND Datum >= CURDATE()
@@ -21,7 +26,8 @@ class EventModel {
         return $st->fetchAll();
     }
 
-    public function getComingSoonEvents(int $days = 45): array {
+    public function getComingSoonEvents(int $days = 45): array
+    {
         $sql = "SELECT * FROM Evenement
                 WHERE IsActief = 1
                   AND Datum > DATE_ADD(CURDATE(), INTERVAL :days DAY)
@@ -31,7 +37,8 @@ class EventModel {
         $st->execute();
         return $st->fetchAll();
     }
-     public function getLocations(): array {
+    public function getLocations(): array
+    {
         try {
             $check = $this->db->query("SHOW TABLES LIKE 'Locatie'");
             $hasLocTable = (bool) $check->fetchColumn();
@@ -57,7 +64,8 @@ class EventModel {
     }
 
     // Bestaat er al een event met deze naam?
-    public function eventNameExists(string $naam): bool {
+    public function eventNameExists(string $naam): bool
+    {
         $sql = "SELECT 1 FROM Evenement WHERE LOWER(Naam) = LOWER(:naam) LIMIT 1";
         $st  = $this->db->prepare($sql);
         $st->bindValue(':naam', trim($naam), PDO::PARAM_STR);
@@ -69,7 +77,8 @@ class EventModel {
      * Alleen verplicht: Naam, Datum, Locatie.
      * Overige NOT NULL velden vullen we met veilige defaults.
      */
-    public function createEvent(array $data): bool {
+    public function createEvent(array $data): bool
+    {
         $sql = "INSERT INTO Evenement
                 (Naam, Datum, Locatie, AantalTicketsPerTijdslot, BeschikbareStands, IsActief, Opmerking)
                 VALUES
@@ -88,7 +97,6 @@ class EventModel {
 
         return $st->execute();
     }
-
     public function getById(int $id): ?array
     {
         $st = $this->db->prepare("SELECT * FROM Evenement WHERE Id = :id LIMIT 1");
@@ -97,45 +105,31 @@ class EventModel {
         $row = $st->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
     }
-    public function canDeleteEventDetailed(int $id): array
+
+    public function eventNameExistsExceptId(string $naam, int $id): bool
     {
-        $st = $this->db->prepare("SELECT Datum FROM Evenement WHERE Id = :id");
-        $st->bindValue(':id', $id, \PDO::PARAM_INT);
+        $sql = "SELECT 1 FROM Evenement 
+            WHERE LOWER(Naam) = LOWER(:naam) AND Id <> :id
+            LIMIT 1";
+        $st  = $this->db->prepare($sql);
+        $st->bindValue(':naam', trim($naam), PDO::PARAM_STR);
+        $st->bindValue(':id', $id, PDO::PARAM_INT);
         $st->execute();
-        $row = $st->fetch(\PDO::FETCH_ASSOC);
-
-        if (!$row) {
-            return ['allowed' => false, 'reason' => 'Event niet gevonden.'];
-        }
-
-        $todayTs = strtotime(date('Y-m-d'));
-        $eventTs = strtotime((string)$row['Datum']);
-
-        if ($eventTs === false) {
-            return ['allowed' => false, 'reason' => 'Ongeldige eventdatum.'];
-        }
-
-        $diffDays = (int) floor(($eventTs - $todayTs) / 86400);
-
-        if ($diffDays > 45) {
-            return ['allowed' => true, 'reason' => null];
-        }
-
-        return [
-            'allowed' => false,
-            'reason'  => 'Deze event kan niet verwijderd worden want datum is bekend gemaakt voor Bezoekers.'
-        ];
+        return (bool) $st->fetchColumn();
     }
 
-    public function deleteEvent(int $id): bool
+    public function updateEvent(int $id, array $data): bool
     {
-        try {
-            $st = $this->db->prepare("DELETE FROM Evenement WHERE Id = :id");
-            $st->bindValue(':id', $id, PDO::PARAM_INT);
-            $st->execute();
-            return $st->rowCount() === 1;
-        } catch (\Throwable $e) {
-            return false;
-        }
+        $sql = "UPDATE Evenement
+            SET Naam = :Naam,
+                Datum = :Datum,
+                Locatie = :Locatie
+            WHERE Id = :Id";
+        $st = $this->db->prepare($sql);
+        $st->bindValue(':Naam',     trim($data['Naam']),    PDO::PARAM_STR);
+        $st->bindValue(':Datum',    $data['Datum'],         PDO::PARAM_STR); // 'YYYY-MM-DD'
+        $st->bindValue(':Locatie',  trim($data['Locatie']), PDO::PARAM_STR);
+        $st->bindValue(':Id',       $id,                    PDO::PARAM_INT);
+        return $st->execute();
     }
 }
