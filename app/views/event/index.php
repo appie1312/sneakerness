@@ -142,6 +142,13 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
                                                 <?= date('F Y', strtotime($event['Datum'])); ?>
                                             </p>
                                             <span class="tag badge bg-secondary">Coming Soon</span>
+                                            <button type="button"
+                                                class="btn btn-outline-danger btn-sm ms-2 js-delete"
+                                                data-id="<?= (int)$event['Id']; ?>"
+                                                title="Verwijderen">
+                                                <img src="https://www.iconarchive.com/download/i103472/paomedia/small-n-flat/sign-delete.1024.png"
+                                                    alt="verwijderen" style="width:16px;height:16px;">
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
