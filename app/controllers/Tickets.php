@@ -72,4 +72,60 @@ public function create()
     $this->view('tickets/create', $data);
 }
 
+public function update($Id = null)
+    {
+        try {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // process POST update
+                if (empty($_POST['Id'])) {
+                    echo '<div class="alert alert-danger text-center"><h4>Geen ticket ID opgegeven.</h4></div>';
+                    header('Refresh:2; url=' . URLROOT . '/tickets/index');
+                    exit;
+                }
+
+                $result = $this->TicketModel->updateTicket($_POST);
+
+                if ($result === false) {
+                    // database fout
+                    echo '<div class="alert alert-danger text-center"><h4>Fout bij bijwerken ticket.</h4></div>';
+                } elseif ($result === 0) {
+                    // geen rijen gewijzigd => geen aanpassing gemaakt
+                    echo '<div class="alert alert-info text-center"><h4>Ticket niet gewijzigd: geen aanpassingen gevonden.</h4></div>';
+                } else {
+                    // $result > 0
+                    echo '<div class="alert alert-success text-center"><h4>Ticket succesvol gewijzigd!</h4></div>';
+                }
+
+                header('Refresh:2; url=' . URLROOT . '/tickets/index');
+                exit;
+            }
+
+            // GET -> show edit form
+            $id = $Id ?? ($_GET['id'] ?? null);
+            if (empty($id)) {
+                header('Location: ' . URLROOT . '/tickets/index');
+                exit;
+            }
+
+            $ticket = $this->TicketModel->getTicketById($id);
+            if (!$ticket) {
+                echo '<div class="alert alert-danger text-center"><h4>Ticket niet gevonden.</h4></div>';
+                header('Refresh:2; url=' . URLROOT . '/tickets/index');
+                exit;
+            }
+
+            $data = [
+                'ticket' => $ticket,
+                'evenementen' => $this->TicketModel->getEvenementen(),
+                'prijzen' => $this->TicketModel->getPrijzen()
+            ];
+
+            $this->view('tickets/update', $data);
+        } catch (Exception $e) {
+            echo '<div class="alert alert-danger text-center"><h4>Fout: ' . $e->getMessage() . '</h4></div>';
+            header('Refresh:3; url=' . URLROOT . '/tickets/index');
+            exit;
+        }
+    }
+
 }

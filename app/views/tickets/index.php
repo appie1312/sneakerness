@@ -21,6 +21,7 @@
                 <th>aantal tickets</th>
                 <th>datum</th>
                 <th>opmerking</th>
+                <th>actie</th>
             </tr>
         </thead>
         <tbody>
@@ -33,10 +34,13 @@
             <tr>
                 <td><?= $ticket['Id'] ?></td>
                 <td><?= $ticket['Evenement'] ?></td>
-                <td>€<?=$ticket['Prijs'] ?></td>
+                <td>€<?= $ticket['Prijs'] ?></td>
                 <td><?= $ticket['AantalTickets'] ?></td>
                 <td><?= $ticket['Datum'] ?></td>
                 <td><?= $ticket['Opmerking'] ?></td>
+                <td>
+                    <a href="<?= URLROOT ?>/tickets/update/<?= $ticket['Id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                </td>
             </tr>
         <?php endforeach; ?>
         <?php endif; ?>
