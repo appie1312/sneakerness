@@ -40,6 +40,7 @@
                 <td><?= $ticket['Opmerking'] ?></td>
                 <td>
                     <a href="<?= URLROOT ?>/tickets/update/<?= $ticket['Id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="<?= URLROOT ?>/tickets/delete/<?= $ticket['Id'] ?>" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Weet je zeker dat je deze ticket wilt verwijderen?');">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>
