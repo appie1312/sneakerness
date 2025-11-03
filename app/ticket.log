@@ -1,0 +1,27 @@
+2025-11-03 11:15:00 | CREATE | {"Id":6,"data":{"EvenementId":7,"PrijsId":4,"AantalTickets":0,"Datum":"2025-12-25","Opmerking":"Gratis promo","IsActief":1}}
+2025-11-03 11:20:00 | UPDATE | {"Id":6,"changed":1,"data":{"EvenementId":7,"PrijsId":4,"AantalTickets":1,"Datum":"2025-12-25","Opmerking":"Promo geactiveerd","IsActief":1}}
+2025-11-03 11:25:00 | DELETE | {"Id":6,"success":true}
+2025-11-03 11:30:00 | CREATE | {"Id":7,"data":{"EvenementId":3,"PrijsId":2,"AantalTickets":100,"Datum":"2026-01-01","Opmerking":"Bulk order","IsActief":1}}
+2025-11-03 11:35:00 | UPDATE | {"Id":7,"changed":1,"data":{"EvenementId":3,"PrijsId":2,"AantalTickets":99,"Datum":"2026-01-01","Opmerking":"Order gecorrigeerd","IsActief":1}}
+2025-11-03 11:40:00 | DELETE | {"Id":7,"success":true}
+2025-11-03 11:45:00 | CREATE | {"Id":8,"data":{"EvenementId":8,"PrijsId":5,"AantalTickets":1,"Datum":"2026-02-14","Opmerking":"Valentijnsactie","IsActief":1}}
+2025-11-03 11:50:00 | UPDATE | {"Id":8,"changed":0,"data":{"EvenementId":8,"PrijsId":5,"AantalTickets":1,"Datum":"2026-02-14","Opmerking":"Valentijnsactie","IsActief":1}}
+2025-11-03 11:55:00 | DELETE | {"Id":8,"success":false}
+2025-11-03 12:00:00 | CREATE | {"Id":9,"data":{"EvenementId":1,"PrijsId":1,"AantalTickets":1,"Datum":"2026-03-01","Opmerking":"Test","IsActief":0}}
+2025-11-03 12:05:00 | UPDATE | {"Id":9,"changed":1,"data":{"EvenementId":1,"PrijsId":1,"AantalTickets":2,"Datum":"2026-03-01","Opmerking":"Test gewijzigd","IsActief":1}}
+2025-11-03 12:10:00 | DELETE | {"Id":9,"success":true}
+2025-11-03 10:30:00 | CREATE | {"Id":3,"data":{"EvenementId":5,"PrijsId":1,"AantalTickets":1,"Datum":"2025-12-10","Opmerking":"Gratis ticket","IsActief":1}}
+2025-11-03 10:35:00 | UPDATE | {"Id":3,"changed":1,"data":{"EvenementId":5,"PrijsId":1,"AantalTickets":2,"Datum":"2025-12-10","Opmerking":"Aantal verhoogd","IsActief":1}}
+2025-11-03 10:40:00 | DELETE | {"Id":3,"success":true}
+2025-11-03 10:45:00 | CREATE | {"Id":4,"data":{"EvenementId":2,"PrijsId":3,"AantalTickets":8,"Datum":"2025-12-15","Opmerking":"Groepsticket","IsActief":1}}
+2025-11-03 10:50:00 | UPDATE | {"Id":4,"changed":1,"data":{"EvenementId":2,"PrijsId":3,"AantalTickets":8,"Datum":"2025-12-15","Opmerking":"Opmerking aangepast","IsActief":1}}
+2025-11-03 10:55:00 | DELETE | {"Id":4,"success":true}
+2025-11-03 11:00:00 | CREATE | {"Id":5,"data":{"EvenementId":1,"PrijsId":2,"AantalTickets":3,"Datum":"2025-12-20","Opmerking":"Normaal ticket","IsActief":0}}
+2025-11-03 11:05:00 | UPDATE | {"Id":5,"changed":0,"data":{"EvenementId":1,"PrijsId":2,"AantalTickets":3,"Datum":"2025-12-20","Opmerking":"Normaal ticket","IsActief":0}}
+2025-11-03 11:10:00 | DELETE | {"Id":5,"success":false}
+2025-11-03 10:00:00 | CREATE | {"Id":1,"data":{"EvenementId":2,"PrijsId":3,"AantalTickets":5,"Datum":"2025-12-01","Opmerking":"Early bird","IsActief":1}}
+2025-11-03 10:05:00 | UPDATE | {"Id":1,"changed":1,"data":{"EvenementId":2,"PrijsId":3,"AantalTickets":10,"Datum":"2025-12-01","Opmerking":"Aantal aangepast","IsActief":1}}
+2025-11-03 10:10:00 | DELETE | {"Id":1,"success":true}
+2025-11-03 10:15:00 | CREATE | {"Id":2,"data":{"EvenementId":4,"PrijsId":2,"AantalTickets":2,"Datum":"2025-12-05","Opmerking":"VIP","IsActief":1}}
+2025-11-03 10:20:00 | UPDATE | {"Id":2,"changed":0,"data":{"EvenementId":4,"PrijsId":2,"AantalTickets":2,"Datum":"2025-12-05","Opmerking":"VIP","IsActief":1}}
+2025-11-03 10:25:00 | DELETE | {"Id":2,"success":false}

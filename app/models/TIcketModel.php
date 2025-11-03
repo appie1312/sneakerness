@@ -2,11 +2,19 @@
 
 class TicketModel
 {
+    private $logFile;
     private $db;
 
     public function __construct()
     {
         $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+        $this->logFile = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'ticket.log';
+    }
+
+    private function logTicketAction($action, $info)
+    {
+        $entry = date('Y-m-d H:i:s') . " | $action | " . json_encode($info) . PHP_EOL;
+        file_put_contents($this->logFile, $entry, FILE_APPEND);
     }
 
     public function getTickets()
@@ -80,24 +88,27 @@ class TicketModel
     }
 }
 
-public function createTicket($data)
-{
-    try {
-        $sql = "INSERT INTO Ticket (EvenementId, PrijsId, AantalTickets, Datum, IsActief, Opmerking)
-                VALUES (:evenementId, :prijsId, :aantalTickets, :datum, 1, :opmerking)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':evenementId', $data['EvenementId']);
-        $stmt->bindParam(':prijsId', $data['PrijsId']);
-        $stmt->bindParam(':aantalTickets', $data['AantalTickets']);
-        $stmt->bindParam(':datum', $data['Datum']);
-        $stmt->bindParam(':opmerking', $data['Opmerking']);
-        $stmt->execute();
-        return $this->db->lastInsertId();
-    } catch (PDOException $e) {
-        throw new Exception("Fout bij aanmaken ticket: " . $e->getMessage());
+    public function createTicket($data)
+    {
+        try {
+            $sql = "INSERT INTO Ticket (EvenementId, PrijsId, AantalTickets, Datum, IsActief, Opmerking)
+                    VALUES (:evenementId, :prijsId, :aantalTickets, :datum, 1, :opmerking)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':evenementId', $data['EvenementId']);
+            $stmt->bindParam(':prijsId', $data['PrijsId']);
+            $stmt->bindParam(':aantalTickets', $data['AantalTickets']);
+            $stmt->bindParam(':datum', $data['Datum']);
+            $stmt->bindParam(':opmerking', $data['Opmerking']);
+            $stmt->execute();
+            $id = $this->db->lastInsertId();
+            $this->logTicketAction('CREATE', ['Id' => $id, 'data' => $data]);
+            return $id;
+        } catch (PDOException $e) {
+            throw new Exception("Fout bij aanmaken ticket: " . $e->getMessage());
+        }
     }
-}
     
+    //deze functie update een ticket op basis van het Id
     public function updateTicket($post)
     {
         try {
@@ -120,25 +131,26 @@ public function createTicket($data)
             $stmt->bindParam(':isActief', $isActief, PDO::PARAM_INT);
             $stmt->bindParam(':id', $post['Id'], PDO::PARAM_INT);
 
+            //dit voert de update uit en logt het resultaat
             $success = $stmt->execute();
-            if ($success) {
-                // retourneer aantal gewijzigde rijen (0 = geen verandering)
-                return $stmt->rowCount();
-            }
-            return false;
+            $rowCount = $success ? $stmt->rowCount() : false;
+            $this->logTicketAction('UPDATE', ['Id' => $post['Id'], 'changed' => $rowCount, 'data' => $post]);
+            return $rowCount;
         } catch (PDOException $e) {
             return false;
         }
     }
 
-
+    //deze functie verwijderd een ticket op basis van het Id
     public function delete($Id)
     {
         try {
             $sql = "DELETE FROM Ticket WHERE Id = :Id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
-            return $stmt->execute();
+            $success = $stmt->execute();
+            $this->logTicketAction('DELETE', ['Id' => $Id, 'success' => $success]);
+            return $success;
         } catch (PDOException $e) {
             return false;
         }
