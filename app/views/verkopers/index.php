@@ -4,84 +4,53 @@
     <meta charset="UTF-8">
     <title>Overzicht Verkopers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="<?= URLROOT ?>/public/css/style.css">
 </head>
 <body>
-    <?php require_once APPROOT . '/views/includes/header.php'; ?>
+<?php require_once APPROOT . '/views/includes/header.php'; ?>
 
-    <div class="container my-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Overzicht van alle verkopers</h1>
+<div class="container my-4">
+  <div class="d-flex justify-content-between mb-3">
+    <h1>Overzicht Verkopers</h1>
+    <a href="<?= URLROOT ?>/verkopers/create" class="btn btn-primary">+ Verkoper toevoegen</a>
+  </div>
 
-            <!--Toevoeg knop -->
-            <a href="<?php echo URLROOT; ?>/verkopers/create" class="btn btn-primary">
-                + Verkoper toevoegen
-            </a>
-        </div>
+  <?php if (empty($data['verkopers'])): ?>
+    <p>Momenteel geen verkopers in het systeem.</p>
+  <?php else: ?>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Speciale Status</th>
+          <th>Verkoopt Soort</th>
+          <th>Stand Type</th>
+          <th>Dagen</th>
+          <th>Opmerking</th>
+          <th>Acties</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($data['verkopers'] as $v): ?>
+        <tr>
+          <td><?= htmlspecialchars($v['Naam']) ?></td>
+          <td><?= $v['SpecialeStatus'] ? 'Ja' : 'Nee' ?></td>
+          <td><?= htmlspecialchars($v['VerkooptSoort']) ?></td>
+          <td><?= htmlspecialchars($v['StandType']) ?></td>
+          <td><?= htmlspecialchars($v['Dagen']) ?></td>
+          <td><?= htmlspecialchars($v['Opmerking']) ?></td>
+          <td>
+            <a href="<?= URLROOT ?>/verkopers/edit/<?= $v['Id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+            <a href="<?= URLROOT ?>/verkopers/delete/<?= $v['Id'] ?>" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  <?php endif; ?>
+</div>
 
-        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-            <div id="success-alert" class="alert alert-success">
-                Verkoper succesvol toegevoegd!
-            </div>
-            <script>
-                setTimeout(function() {
-                    var alert = document.getElementById('success-alert');
-                    if (alert) {
-                        alert.style.display = 'none';
-                    }
-                }, 3000);
-            </script>
-        <?php endif; ?>
-
-        <?php if (isset($_GET['error']) && $_GET['error'] == 'exists'): ?>
-            <div id="error-alert" class="alert alert-danger">
-                Verkoper bestaat al hij is niet toegevoegd!
-            </div>
-            <script>
-                setTimeout(function() {
-                    var alert = document.getElementById('error-alert');
-                    if (alert) {
-                        alert.style.display = 'none';
-                    }
-                }, 3000);
-            </script>
-        <?php endif; ?>
-
-        <?php 
-        try {
-            if (empty($verkopers)) {
-                echo "<p>Momenteel geen verkopers in ons systeem.</p>";
-            } else {
-                echo '<table class="table table-bordered table-striped">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Naam</th>
-                                <th>Speciale Status</th>
-                                <th>Verkoopt Soort</th>
-                                <th>Stand Type</th>
-                                <th>Dagen</th>
-                                <th>Opmerking</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-                foreach ($verkopers as $verkoper) {
-                    echo '<tr>
-                            <td>' . $verkoper->Naam . '</td>
-                            <td>' . ($verkoper->SpecialeStatus ? 'Ja' : 'Nee') . '</td>
-                            <td>' . $verkoper->VerkooptSoort . '</td>
-                            <td>' . $verkoper->StandType . '</td>
-                            <td>' . $verkoper->Dagen . '</td>
-                            <td>' . $verkoper->Opmerking . '</td>
-                          </tr>';
-                }
-                echo '</tbody></table>';
-            }
-        } catch (Exception $e) {
-            echo '<div class="alert alert-danger">Er is een fout opgetreden: ' . $e->getMessage() . '</div>';
-        }
-        ?>
-    </div>
-    
-    <?php require_once APPROOT . '/views/includes/footer.php'; ?>
+<?php require_once APPROOT . '/views/includes/footer.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

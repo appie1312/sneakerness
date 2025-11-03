@@ -1,84 +1,112 @@
 <?php
-require_once __DIR__ . '/../models/VerkoperModel.php';
-require_once __DIR__ . '/../libraries/Database.php';
 
 class Verkopers extends BaseController
 {
-    private VerkoperModel $verkoperModel;
+    private $verkoperModel;
 
     public function __construct()
     {
-        $db  = new Database();
-        $this->verkoperModel = new VerkoperModel($db);
+        $this->verkoperModel = $this->model('VerkoperModel');
     }
 
-    public function index(): void
+    public function index()
     {
         $verkopers = $this->verkoperModel->getAlleVerkopers();
-
-
-        require APPROOT . '/views/verkopers/index.php';
+        $data = ['verkopers' => $verkopers];
+        $this->view('verkopers/index', $data);
     }
 
-    public function create(): void
+    public function create()
     {
-        require APPROOT . '/views/includes/header.php';
-        require APPROOT . '/views/verkopers/create.php';
-        require APPROOT . '/views/includes/footer.php';
+        $this->view('verkopers/create');
     }
 
-    public function store(): void
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $errors = [];
+    public function store()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: " . URLROOT . "/verkopers/create");
+            exit;
+        }
+
         $data = [
             'Naam' => trim($_POST['Naam']),
             'SpecialeStatus' => isset($_POST['SpecialeStatus']) ? 1 : 0,
             'VerkooptSoort' => trim($_POST['VerkooptSoort']),
             'StandType' => trim($_POST['StandType']),
             'Dagen' => trim($_POST['Dagen']),
-            'IsActief' => isset($_POST['IsActief']) ? 1 : 0,
             'Opmerking' => trim($_POST['Opmerking'])
         ];
 
-        // Validatie regels
-        if (empty($data['Naam'])) {
-            $errors['Naam'] = 'Naam is verplicht.';
-        } elseif (strlen($data['Naam']) > 255) {
-            $errors['Naam'] = 'Naam mag maximaal 255 tekens bevatten.';
-        }
-
-        if (empty($data['StandType'])) {
-            $errors['StandType'] = 'Stand Type is verplicht.';
-        } elseif (!in_array($data['StandType'], ['A', 'AA', 'AA+'])) {
-            $errors['StandType'] = 'Ongeldige stand type geselecteerd.';
-        }
-
-
-        // Als er fouten zijn, toon opnieuw het formulier met fouten
-        if (!empty($errors)) {
-            require APPROOT . '/views/includes/header.php';
-            require APPROOT . '/views/verkopers/create.php';
-            require APPROOT . '/views/includes/footer.php';
-            return;
-        }
-
-        
-        // ... na validatie en vóór het toevoegen:
         if ($this->verkoperModel->bestaatVerkoper($data['Naam'])) {
-            header("Location: /" . URLROOT . "/verkopers/index?error=exists");
+            header("Location: " . URLROOT . "/verkopers/create?error=exists");
             exit;
         }
 
-        // Als alles goed is
-        try {
-            $this->verkoperModel->addVerkoper($data);
+        $this->verkoperModel->addVerkoper($data);
+        header("Location: " . URLROOT . "/verkopers/index?success=1");
+        exit;
+    }
+
+    public function edit($id)
+    {
+        $verkoper = $this->verkoperModel->getVerkoperById((int)$id);
+        if (!$verkoper) {
+            header("Location: " . URLROOT . "/verkopers/index?error=notfound");
+            exit;
+        }
+
+        $data = ['verkoper' => $verkoper];
+        $this->view('verkopers/edit', $data);
+    }
+
+    public function update($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: " . URLROOT . "/verkopers/index");
             exit;
-        } catch (Exception $e) {
-            echo '<div class="alert alert-danger">Fout bij toevoegen van verkoper: ' . $e->getMessage() . '</div>';
         }
-    }
-}
 
+        $data = [
+            'Id' => (int)$id,
+            'Naam' => trim($_POST['Naam']),
+            'SpecialeStatus' => isset($_POST['SpecialeStatus']) ? 1 : 0,
+            'VerkooptSoort' => trim($_POST['VerkooptSoort']),
+            'StandType' => trim($_POST['StandType']),
+            'Dagen' => trim($_POST['Dagen']),
+            'Opmerking' => trim($_POST['Opmerking'])
+        ];
+
+        if ($this->verkoperModel->bestaatVerkoper($data['Naam'], $id)) {
+            header("Location: " . URLROOT . "/verkopers/edit/$id?error=exists");
+            exit;
+        }
+
+        $this->verkoperModel->updateVerkoper($data);
+        header("Location: " . URLROOT . "/verkopers/index?success=updated");
+        exit;
+    }
+
+    public function delete($id)
+    {
+        $verkoper = $this->verkoperModel->getVerkoperById((int)$id);
+        if (!$verkoper) {
+            header("Location: " . URLROOT . "/verkopers/index?error=notfound");
+            exit;
+        }
+
+        $data = ['verkoper' => $verkoper];
+        $this->view('verkopers/delete', $data);
+    }
+
+    public function destroy($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: " . URLROOT . "/verkopers/index");
+            exit;
+        }
+
+        $this->verkoperModel->deleteVerkoper((int)$id);
+        header("Location: " . URLROOT . "/verkopers/index?success=deleted");
+        exit;
+    }
 }

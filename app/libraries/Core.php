@@ -20,6 +20,12 @@ class Core
          * Roep de functie getURL() aan om de url in een array te zetten
          */
         $url = $this->getURL();
+
+            // debug: laat zien wat Core ziet van de URL
+    // echo '<pre>';
+    // print_r($url);
+    // echo '</pre>';
+    // exit;
         
         /**
          * Check of de controllerclass bestaat
